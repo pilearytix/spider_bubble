@@ -1,0 +1,28 @@
+{
+  "headerText": "The Bubble Multiverse",
+  "bodyText": "You find yourself in a strange iridescent sphere, floating in what appears to be endless space. Around you, other bubbles of various sizes shimmer with different realities. Where do you want to go?",
+  "footerText": "Choose your destiny...",
+  "buttonText": "Select a Bubble",
+  "sections": [
+    {
+      "title": "Available Bubbles",
+      "rows": [
+        {
+          "id": "bubble_nebula",
+          "title": "Bubble Nebula",
+          "description": "A vast cosmic bubble formed by stellar winds"
+        },
+        {
+          "id": "economic_bubble",
+          "title": "Economic Bubble",
+          "description": "A world of inflated digital assets and crypto dreams"
+        },
+        {
+          "id": "soap_bubble",
+          "title": "Soap Bubble",
+          "description": "A fragile world of rainbow reflections"
+        }
+      ]
+    }
+  ]
+} 

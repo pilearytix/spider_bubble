@@ -1,0 +1,23 @@
+{
+  "headerText": "Oops!",
+  "bodyText": "Something went wrong in the bubble multiverse. The reality seems unstable.",
+  "footerText": "What would you like to do?",
+  "buttonText": "Choose Action",
+  "sections": [
+    {
+      "title": "Available Actions",
+      "rows": [
+        {
+          "id": "restart",
+          "title": "Start Over",
+          "description": "Begin your journey anew"
+        },
+        {
+          "id": "last_scene",
+          "title": "Try Again",
+          "description": "Attempt to return to your last location"
+        }
+      ]
+    }
+  ]
+} 

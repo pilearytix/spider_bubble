@@ -1,0 +1,22 @@
+{
+  "scene_transitions": {
+    "to_nebula": {
+      "text": "The cosmic winds pull you gently towards the nebula...",
+      "delay": 2000
+    },
+    "to_economic": {
+      "text": "Reality shifts as numbers and graphs materialize around you...",
+      "delay": 2000
+    },
+    "to_soap": {
+      "text": "The world becomes iridescent as you float towards the delicate sphere...",
+      "delay": 2000
+    }
+  },
+  "death_transitions": {
+    "void": {
+      "text": "You feel yourself dissolving into the void...",
+      "delay": 3000
+    }
+  }
+} 

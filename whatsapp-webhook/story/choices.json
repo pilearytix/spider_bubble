@@ -1,0 +1,64 @@
+{
+  "bubble_nebula": {
+    "message": {
+      "header": {
+        "type": "text",
+        "text": "The Cosmic Bubble"
+      },
+      "bodyText": "You float into the cosmic bubble. The stellar winds whip around you as you witness the birth of new stars. In the distance, you see a mysterious spacecraft and a swirling temporal vortex.",
+      "footerText": "Choose your next action...",
+      "buttons": [
+        { "id": "investigate_ship", "title": "Check Spacecraft" },
+        { "id": "enter_vortex", "title": "Enter Vortex" }
+      ]
+    },
+    "effects": {
+      "nextScene": "cosmic/nebula"
+    }
+  },
+  "economic_bubble": {
+    "message": {
+      "header": {
+        "type": "text",
+        "text": "The Economic Bubble"
+      },
+      "bodyText": "You're surrounded by floating cryptocurrencies and NFTs. Everything seems valuable, but somehow unreal. You notice a suspicious trading bot and a door marked 'Market Crash'.",
+      "footerText": "Choose your next action...",
+      "buttons": [
+        { "id": "hack_bot", "title": "Hack the Bot" },
+        { "id": "escape_crash", "title": "Escape Crash" }
+      ]
+    },
+    "effects": {
+      "nextScene": "economic/market"
+    }
+  },
+  "soap_bubble": {
+    "header": {
+      "type": "text",
+      "text": "The Soap Bubble"
+    },
+    "bodyText": "Inside the soap bubble, everything is distorted by rainbow refractions. You see a tiny civilization living on the surface tension, and a mysterious bubble-blowing wand.",
+    "footerText": "Choose your next action...",
+    "buttons": [
+      { "id": "meet_people", "title": "Meet Tiny People" },
+      { "id": "use_wand", "title": "Use Magic Wand" }
+    ]
+  },
+  "default": {
+    "message": {
+      "header": {
+        "type": "text",
+        "text": "Lost in the Bubbleverse"
+      },
+      "bodyText": "You seem to have wandered into an unknown bubble. The surroundings are mysterious and unfamiliar.",
+      "footerText": "What will you do?",
+      "buttons": [
+        { "id": "start_over", "title": "Start Over" }
+      ]
+    },
+    "effects": {
+      "nextScene": "intro/welcome"
+    }
+  }
+} 
