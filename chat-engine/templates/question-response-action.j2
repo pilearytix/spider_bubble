@@ -1,0 +1,55 @@
+{
+    "objects": {
+        {% for obj_key, obj_data in objects.items() %}
+        "{{ obj_key }}": {
+            "observations": {{ obj_data.observations | tojson }},
+            "causes": {{ obj_data.causes | tojson }},
+            "mystical_questions": {{ obj_data.mystical_questions | tojson }}
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    },
+    "question_structure": {{ question_structure | tojson }},
+    "responses": {
+        "acknowledgements": {{ responses.acknowledgements | tojson }},
+        "outcomes": {
+            {% for outcome_key, outcome_data in responses.outcomes.items() %}
+            "{{ outcome_key }}": {
+                "left": {{ outcome_data.left | tojson }},
+                "left_items": {{ outcome_data.left_items | tojson }},
+                "right": {{ outcome_data.right | tojson }},
+                "right_items": {{ outcome_data.right_items | tojson }}
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}
+        },
+        "speculations": {{ responses.speculations | tojson }}
+    },
+    "actions": {
+        "objects": {
+            {% for obj_key, obj_data in actions.objects.items() %}
+            "{{ obj_key }}": {
+                "name": {{ obj_data.name | tojson }},
+                "actions": {{ obj_data.actions | tojson }},
+                "valid_results": {{ obj_data.valid_results | tojson }}
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}
+        },
+        "npcs": {
+            {% for npc_key, npc_data in actions.npcs.items() %}
+            "{{ npc_key }}": {
+                "name": {{ npc_data.name | tojson }},
+                "actions": {{ npc_data.actions | tojson }},
+                "valid_results": {{ npc_data.valid_results | tojson }}
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}
+        },
+        "locations": {
+            {% for loc_key, loc_data in actions.locations.items() %}
+            "{{ loc_key }}": {
+                "name": {{ loc_data.name | tojson }},
+                "actions": {{ loc_data.actions | tojson }},
+                "valid_results": {{ loc_data.valid_results | tojson }}
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}
+        }
+    }
+} 
