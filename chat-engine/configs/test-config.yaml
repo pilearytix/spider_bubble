@@ -1,0 +1,57 @@
+objects:
+  towel:
+    observations:
+    - that towel looks dirty
+    - that towel looks like it has been there for ages
+    - is that towel yours?
+    causes:
+    - you didn't bother to clean them?
+    - that the cleaner is sick with bird flu?
+    mystical_questions:
+    - Shouldn't someone pick this up?
+    - I feel like I should report this.
+  crisps:
+    observations:
+    - is there a packet of crisps here?
+    - is the packet of crisps floating in the pool?
+    causes:
+    - the people who come here are slovenly?
+    - that bloody goat, again?
+    mystical_questions:
+    - Should I eat them?
+    - Should I report it?
+question_structure: Tell me, why [observation] Is it because [cause] [mystical_question]
+responses:
+  acknowledgements:
+  - hmmmm...
+  - oh yeah, you *could* say it like that...
+  - I'm not really sure...
+  speculations:
+  - Maybe you should?
+  - Oh, definitely.
+  outcomes:
+    towel:
+      left:
+      - They need cleaned.
+      - They need to be sacked. You know who.
+      left_items:
+      - towel
+      - towel
+      right:
+      - crisps
+      - crisps
+      right_items:
+      - towel
+      - towel
+actions:
+  objects:
+    towel:
+      name: dirty towel
+      actions:
+      - put in the bin
+      - pick-up and lick
+      valid_results:
+      - to sort shit out.
+      - to keep things nice and tidy.
+  npcs: {}
+  locations: {}

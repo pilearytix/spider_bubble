@@ -1,0 +1,77 @@
+objects:
+  water_system:
+    observations:
+      - "is the water pressure lower than usual?"
+      - "does this fountain sound different now?"
+    causes:
+      - "of those old pipes finally giving up?"
+      - "of the water system getting older now?"
+    mystical_questions:
+      - "Should we call maintenance right away?"
+      - "Will repairs take more than one day?"
+
+question_structure: "Tell me, why [observation] Is it because [cause] [mystical_question]"
+
+responses:
+  acknowledgements:
+    - "you've uncovered something crucial."
+    - "that explains these strange events."
+  
+  outcomes:
+    water_system:
+      left:
+        - "The fountain needs proper repairs."
+        - "The water pressure requires investigation."
+      left_items: ["fountain", "steam_valve"]
+      right:
+        - "The water tank needs inspection."
+        - "The filtration system seems blocked."
+      right_items: ["fountain", "boiler"]
+  
+  speculations:
+    - "Let's take a closer look and see what we uncover."
+    - "Maybe there's something nearby we can check."
+
+actions:
+  objects:
+    fountain:
+      name: "the fountain basin"
+      actions:
+        - "inspect"
+        - "clean"
+        - "repair"
+      valid_results:
+        - "to uncover a hidden clue."
+        - "to determine the significance of it."
+    
+    steam_valve:
+      name: "the steam valve"
+      actions:
+        - "adjust"
+        - "repair"
+        - "calibrate"
+      valid_results:
+        - "to ensure everything works as it should."
+        - "to regulate the steam pressure."
+    
+  npcs:
+    master:
+      name: "the hammam master"
+      actions:
+        - "consult"
+        - "ask"
+        - "learn from"
+      valid_results:
+        - "to gather more evidence."
+        - "to confirm whether our suspicions are correct."
+  
+  locations:
+    boiler:
+      name: "the boiler room"
+      actions:
+        - "explore"
+        - "inspect"
+        - "maintain"
+      valid_results:
+        - "to uncover a hidden clue."
+        - "to ensure the system is operational." 
