@@ -142,6 +142,7 @@ namespace GGJ2025
 
 		private void OnEnable ()
 		{
+			AC.ACDebug.Log("[ConversationFromFile] OnEnable called", this);
 			AC.EventManager.OnEndActionList += OnEndActionList;
 			AC.EventManager.OnEndConversation += OnEndConversation;
 			AC.EventManager.OnFinishLoading += OnFinishLoading;
