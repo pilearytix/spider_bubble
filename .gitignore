@@ -12,7 +12,8 @@ Global Game Jam 2025/[Uu]ser[Ss]ettings/
 Global Game Jam 2025/[Ll]ibrary/PackageCache/
 Global Game Jam 2025/[Ll]ibrary/PackageManager/
 Global Game Jam 2025/[Ll]ogs/
-
+unity
+*/node_modules/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
