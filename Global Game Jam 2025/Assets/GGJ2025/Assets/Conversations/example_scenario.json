@@ -228,7 +228,7 @@
             ]
         }
     },
-    "question_structure": "Tell me, why [observation] Is it because [cause] [mystical_question]",
+    "question_structure": "observation] Is it because [cause] [mystical_question]",
     "responses": {
         "acknowledgements": [
             "you've uncovered something crucial.",

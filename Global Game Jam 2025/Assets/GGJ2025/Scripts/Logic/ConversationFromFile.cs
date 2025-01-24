@@ -18,6 +18,7 @@ using System.Linq;
 using System;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using AC;
 
 namespace GGJ2025
 {    
@@ -103,23 +104,59 @@ namespace GGJ2025
 			if (conversation == this && loadFromJson && jsonFile != null)
 			{
 				AC.ACDebug.Log($"Intercepting conversation click with optionID: {optionID}", this);
-				
-				// Only load new options if we don't have any or if this is a new conversation
-				if (options.Count == 0 || AC.KickStarter.playerInput.activeConversation != this)
-				{
-					LoadConversationFromJson();
-				}
 
-				// Verify the option exists before running it
-				if (GetOptionWithID(optionID) != null)
+				ButtonDialogExtended buttonDialog = GetOptionWithID(optionID) as ButtonDialogExtended;
+				ConversationOptionData optionData = buttonDialog?.customData as ConversationOptionData;
+
+				// log the option data
+				AC.ACDebug.Log($"Option data: {optionData}", this);
+
+				// Handle the option based on its type
+				switch (stage)
 				{
-					RunOption(optionID);
-					AC.KickStarter.playerMenus?.RefreshDialogueOptions();
+					case ConversationStage.Question:
+						AC.ACDebug.Log("Transitioning to Response stage", this);
+						LoadResponseOptions(optionData);
+						stage = ConversationStage.Response;
+						break;
+
+					case ConversationStage.Response:
+						AC.ACDebug.Log("Transitioning to Action stage", this);
+						LoadActionOptions(optionData);
+						stage = ConversationStage.Action;
+						break;
+
+					case ConversationStage.Action:
+						ExecuteAction(optionData);
+						AC.ACDebug.Log("Returning to Question stage", this);
+						LoadConversationFromJson();
+						stage = ConversationStage.Question;
+						break;
 				}
-				else
-				{
-					AC.ACDebug.LogWarning($"Invalid option ID: {optionID}", this);
-				}
+			
+				
+				// conversation.options.Clear();
+				// if(stage == ConversationStage.Question) 
+				// {
+				// 	stage = ConversationStage.Response;
+				// }
+				
+				// // Only load new options if we don't have any or if this is a new conversation
+				// if (options.Count == 0 || AC.KickStarter.playerInput.activeConversation != this)
+				// {
+				// 	LoadConversationFromJson();
+				// }
+
+				// // Verify the option exists before running it
+				// if (GetOptionWithID(optionID) != null)
+				// {
+				// 	RunOption(optionID);
+				// 	AC.KickStarter.playerMenus?.RefreshDialogueOptions();
+				// }
+				// else
+				// {
+				// 	AC.ACDebug.LogWarning($"Invalid option ID: {optionID}", this);
+				// }
 			}
 		}
 
@@ -148,7 +185,7 @@ namespace GGJ2025
 			AC.EventManager.OnFinishLoading += OnFinishLoading;
 
 			// Add JSON loading logic
-			if (loadFromJson && jsonFile != null)
+			if (stage == ConversationStage.Question || stage == ConversationStage.Action && loadFromJson && jsonFile != null)
 			{
 				LoadConversationFromJson();
 			}
@@ -696,6 +733,8 @@ namespace GGJ2025
 
 		protected void RunOption(ButtonDialogExtended option)
 		{
+
+			
 			AC.ACDebug.Log($"[ConversationFromFile] RunOption(ButtonDialogExtended) called with option ID: {option?.ID}", this);
 			if (option == null)
 			{
@@ -713,6 +752,13 @@ namespace GGJ2025
 
 			// Mark the option as chosen
 			option.hasBeenChosen = true;
+
+			if(optionData.type == "question")
+			{
+				stage = ConversationStage.Response;
+				AC.ACDebug.Log("Transitioning to Response stage", this);
+				LoadResponseOptions(optionData);
+			}
 
 			// Log the current stage and option type
 			AC.ACDebug.Log($"Current stage: {stage}, Option type: {optionData.type}", this);
@@ -787,6 +833,7 @@ namespace GGJ2025
 		protected new void OnEndActionList (AC.ActionList actionList, AC.ActionListAsset actionListAsset, bool isSkipping)
 		{
 			AC.ACDebug.Log($"[ConversationFromFile] OnEndActionList called with actionList: {actionList?.name}, isSkipping: {isSkipping}", this);
+			
 			if (overrideActiveList == null)
 			{
 				foreach (AC.ButtonDialog buttonDialog in options)
@@ -859,9 +906,14 @@ namespace GGJ2025
 						}
 					}
 
-					// Create options for each response
-					foreach (var (text, items) in allResponses)
+					// Randomly select up to 3 responses
+					int numOptionsToShow = Mathf.Min(3, allResponses.Count);
+					for (int i = 0; i < numOptionsToShow; i++)
 					{
+						// Select a random response
+						int randomIndex = UnityEngine.Random.Range(0, allResponses.Count);
+						var (text, items) = allResponses[randomIndex];
+						
 						var responseData = new ConversationOptionData
 						{
 							type = "response",
@@ -874,6 +926,9 @@ namespace GGJ2025
 						{
 							options.Add(responseDialog);
 						}
+						
+						// Remove the selected response to avoid duplicates
+						allResponses.RemoveAt(randomIndex);
 					}
 				}
 				
@@ -1374,7 +1429,17 @@ namespace GGJ2025
 			// Set up the actions based on the option type
 			dialogueOption.actions = new List<AC.Action>();
 			dialogueOption.actionListType = AC.ActionListType.PauseGameplay;
+
+			// Add a action to run this conversation again
+			dialogueOption.actions.Add(new AC.ActionComment());
+			dialogueOption.actions[0].comment = "Run this conversation again";
 			
+			// Run this conversation 
+			var runConversationAction = new AC.ActionConversation();
+			runConversationAction.conversation = this;
+			dialogueOption.actions.Add(runConversationAction);
+
+
 			dialog.dialogueOption = dialogueOption;
 			dialog.customData = optionData;
 			dialog.linkToInventory = false;
