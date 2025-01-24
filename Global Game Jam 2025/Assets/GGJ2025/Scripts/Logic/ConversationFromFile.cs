@@ -115,22 +115,22 @@ namespace GGJ2025
 				switch (stage)
 				{
 					case ConversationStage.Question:
+						stage = ConversationStage.Response;
 						AC.ACDebug.Log("Transitioning to Response stage", this);
 						LoadResponseOptions(optionData);
-						stage = ConversationStage.Response;
 						break;
 
 					case ConversationStage.Response:
+						stage = ConversationStage.Action;
 						AC.ACDebug.Log("Transitioning to Action stage", this);
 						LoadActionOptions(optionData);
-						stage = ConversationStage.Action;
 						break;
 
 					case ConversationStage.Action:
+						stage = ConversationStage.Question;
 						ExecuteAction(optionData);
 						AC.ACDebug.Log("Returning to Question stage", this);
 						LoadConversationFromJson();
-						stage = ConversationStage.Question;
 						break;
 				}
 			
@@ -1295,7 +1295,7 @@ namespace GGJ2025
 				}
 				else
 				{
-					jsonData.question_structure = "Tell me, why [observation] Is it because [cause] [mystical_question]";
+					jsonData.question_structure = "[observation] Is it because [cause] [mystical_question]";
 				}
 				
 				// Parse responses
