@@ -5,7 +5,7 @@ objects:
       - "does this fountain sound different now?"
     causes:
       - "of those old pipes finally giving up?"
-      - "of the water system getting older now?"
+      - "of the water system getting older?"
     mystical_questions:
       - "Should we call maintenance right away?"
       - "Will repairs take more than one day?"
@@ -52,7 +52,7 @@ actions:
         - "calibrate"
       valid_results:
         - "to ensure everything works as it should."
-        - "to regulate the steam pressure."
+        - "to regulate the *steam* pressure."
     
   npcs:
     master:

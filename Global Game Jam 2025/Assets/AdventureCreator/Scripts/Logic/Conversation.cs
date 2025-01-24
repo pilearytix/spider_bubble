@@ -109,8 +109,10 @@ namespace AC
 		 */
 		public void Interact (ActionList actionList, ActionConversation actionConversation)
 		{
+
+			Debug.Log("Interact called");
+
 			overrideActiveList = null;
-			
 			if (actionList)
 			{
 				onFinishActiveList = null;
