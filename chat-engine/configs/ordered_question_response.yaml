@@ -1,0 +1,25 @@
+objects:
+  person:
+    observations:
+      - text: "you're looking good!"
+        type: person
+      - text: "are they new shoes?"
+        type: shoes
+
+starter: "Hey, I haven't seen you in ages [observation]"
+
+questions:
+  - "One question"
+  - "Two question"
+
+closer:
+  - "Cool, nice to see you again (you weird who is obsessed with clarkes shoes)"
+  - "You smell"
+
+responses:
+  person:
+    text: "So nice to see you too"
+    followup: "how much did they cost"
+  shoes:
+    text: "So nice to see you too"
+    followup: "I bought them from clarkes"
