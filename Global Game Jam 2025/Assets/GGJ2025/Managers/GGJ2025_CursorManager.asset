@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2cd11e06e7fc41a595e0cccca50dae3, type: 3}
   m_Name: GGJ2025_CursorManager
   m_EditorClassIdentifier: 
-  cursorRendering: 0
+  cursorRendering: 2
   cursorMode: 0
   uiCursorPrefab: {fileID: 1233823316936846, guid: fae571c80f5c247dea8f06676d280cf7, type: 3}
   cursorDisplay: 0
   allowMainCursor: 1
   lockSystemCursor: 1
   keepCursorWithinScreen: 1
+  confineSystemCursor: 1
   allowWalkCursor: 0
   syncWalkCursorWithInteraction: 1
   walkCursor_ID: 0
@@ -31,9 +32,9 @@ MonoBehaviour:
   allowInteractionCursorForInventory: 0
   cycleCursors: 0
   onlyAnimateOverHotspots: 0
-  leftClickExamine: 0
+  leftClickExamine: 1
   onlyWalkWhenOverNavMesh: 0
-  onlyShowInventoryLabelOverHotspots: 0
+  onlyShowInventoryLabelOverHotspots: 1
   inventoryCursorSize: 0.06
   allowIconInput: 0
   waitIcon:
@@ -51,7 +52,7 @@ MonoBehaviour:
     alwaysAnimate: 0
   pointerIcon:
     texture: {fileID: 2800000, guid: 5c83780962ed843c0928648679746938, type: 3}
-    isAnimated: 0
+    isAnimated: 1
     numFrames: 1
     numRows: 1
     numCols: 1
@@ -60,7 +61,8 @@ MonoBehaviour:
     endAnimOnLastFrame: 0
     skipFirstFrameWhenLooping: 0
     clickOffset: {x: 0, y: 0}
-    frameSpeeds: []
+    frameSpeeds:
+    - 1
     alwaysAnimate: 0
   walkIcon:
     texture: {fileID: 0}
@@ -89,7 +91,7 @@ MonoBehaviour:
     frameSpeeds: []
     alwaysAnimate: 0
   cameraDragIcon:
-    texture: {fileID: 0}
+    texture: {fileID: 2800000, guid: cc3fa24605c3c4b0081ccfc43043abf8, type: 3}
     isAnimated: 0
     numFrames: 1
     numRows: 1
@@ -130,7 +132,8 @@ MonoBehaviour:
     endAnimOnLastFrame: 0
     skipFirstFrameWhenLooping: 0
     clickOffset: {x: 0, y: 0}
-    frameSpeeds: []
+    frameSpeeds:
+    - 1
     alwaysAnimate: 0
     dontCycle: 0
     label: Use
@@ -180,4 +183,4 @@ MonoBehaviour:
   lookUseCursorAction: 1
   lookCursor_ID: 1
   hideCursorWhenDraggingMoveables: 1
-  forceCursorInEditor: 1
+  forceCursorInEditor: 0

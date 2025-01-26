@@ -17,8 +17,8 @@ TagManager:
   - NavMesh
   - BackgroundImage
   - DistantHotspot
-  - 
-  - 
+  - Front
+  - Overlay
   - 
   - 
   - 
@@ -42,6 +42,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Front
+    uniqueID: 846089543
+    locked: 0
+  - name: Overlay
+    uniqueID: 2196240657
+    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1
@@ -51,3 +57,4 @@ TagManager:
   - Light Layer 5
   - Light Layer 6
   - Light Layer 7
+  - Front

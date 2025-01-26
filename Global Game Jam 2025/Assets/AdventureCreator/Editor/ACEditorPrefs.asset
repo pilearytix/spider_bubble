@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ACEditorPrefs
   m_EditorClassIdentifier: 
   hierarchyIconOffset: 0
-  hotspotGizmoColor: {r: 1, g: 1, b: 0, a: 0.6}
+  hotspotGizmoColor: {r: 0.88140154, g: 0.88140154, b: 0.35992536, a: 0.6}
   triggerGizmoColor: {r: 1, g: 0.3, b: 0, a: 0.8}
   collisionGizmoColor: {r: 0, g: 1, b: 1, a: 0.8}
   pathGizmoColor: {r: 0, g: 0, b: 1, a: 1}

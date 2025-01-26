@@ -1,0 +1,224 @@
+{
+    "conversations": [
+        {
+            "question": "Do you find it relaxing here?",
+            "answer": "Certainly, it's nice to get <i>away</i> from the endless screaming once in a while."
+        },
+        {
+            "question": "Why do you come here?",
+            "answer": "I come here to <i>escape</i> our supposed 'leader', Tengri. Why that arrogant oaf gets the final say on everything, I do not know."
+        },
+        {
+            "question": "Will washing here cleanse me?",
+            "answer": "No amount of time here can <i>wash</i> away your guilty conscience, haha."
+        },
+        {
+            "question": "What is your purpose?",
+            "answer": "I am tasked with dealing with the dead and the damned. A thankless job, yet without <i>darkness</i>, there can be no light."
+        },
+        {
+            "question": "This place is beautiful, isn't it?",
+            "answer": "It is, but why isn't this <i>room</i> adorned with more gold? Was my presence not aforementioned?"
+        },
+        {
+            "question": "Is it always this hot in here?",
+            "answer": "Of course! But this is refreshingly cool compared to the infernal <i>heat</i> I am used to."
+        },
+        {
+            "question": "Can I smell lavender?",
+            "answer": "Indeed. The stench of <i>decay</i> does not fill this place. It is... pleasant."
+        },
+        {
+            "question": "How long have you been here?",
+            "answer": "Who can tell? We immortal beings do not <i>measure</i> our gradations of man."
+        }
+    ],
+    "objects": {
+        "dark_aura": {
+            "observations": [
+                "Is the darkness seeping into the steam?",
+                "Are the shadows dancing unusually?",
+                "Does the gloom seem particularly thick?",
+                "Is there an otherworldly chill?",
+                "Are the corners darker than usual?",
+                "Does the light seem to bend strangely?",
+                "Is there an unsettling presence?",
+                "Are the shadows moving against the steam?",
+                "Does the atmosphere feel heavy?",
+                "Is there a supernatural darkness?",
+                "Are the lights dimming mysteriously?",
+                "Does the air feel thick with power?",
+                "Is there an ethereal darkness present?",
+                "Are the shadows whispering?",
+                "Does the darkness pulse with energy?"
+            ],
+            "causes": [
+                "of underworld residue?",
+                "of divine presence?",
+                "of immortal energy?",
+                "of death's influence?",
+                "of otherworldly power?",
+                "of supernatural forces?",
+                "of divine authority?",
+                "of immortal essence?",
+                "of netherworld proximity?",
+                "of dark divinity?",
+                "of eternal presence?",
+                "of death's embrace?",
+                "of immortal nature?",
+                "of divine manifestation?",
+                "of otherworldly origin?"
+            ],
+            "mystical_questions": [
+                "Should we embrace the darkness?",
+                "Could we balance the energies?",
+                "Might light and dark coexist?",
+                "Would purification help?",
+                "Could we harmonize the forces?",
+                "Should we acknowledge both sides?",
+                "Might acceptance bring peace?",
+                "Could we find equilibrium?",
+                "Should we seek balance?",
+                "Would understanding help?",
+                "Could we integrate both aspects?",
+                "Might compromise work?",
+                "Should we explore duality?",
+                "Could we find harmony?",
+                "Might wisdom guide us?"
+            ]
+        },
+        "divine_presence": {
+            "observations": [
+                "Is divinity affecting the atmosphere?",
+                "Does immortal power linger here?",
+                "Is there a godly presence?",
+                "Are divine energies visible?",
+                "Does authority emanate strongly?",
+                "Is immortal essence manifesting?",
+                "Are celestial forces gathering?",
+                "Does divine power ripple through?",
+                "Is there an immortal aura?",
+                "Are godly influences apparent?",
+                "Does divinity shine through?",
+                "Is eternal power present?",
+                "Are divine signs showing?",
+                "Does immortality leave traces?",
+                "Is godly essence evident?"
+            ],
+            "causes": [
+                "of divine visitation?",
+                "of immortal presence?",
+                "of godly authority?",
+                "of eternal nature?",
+                "of divine power?",
+                "of immortal essence?",
+                "of celestial influence?",
+                "of divine manifestation?",
+                "of eternal being?",
+                "of godly presence?",
+                "of immortal energy?",
+                "of divine authority?",
+                "of eternal power?",
+                "of celestial essence?",
+                "of divine nature?"
+            ],
+            "mystical_questions": [
+                "Should we honor the presence?",
+                "Could we show proper respect?",
+                "Might reverence be needed?",
+                "Would acknowledgment help?",
+                "Could we offer tribute?",
+                "Should we make offerings?",
+                "Might worship be appropriate?",
+                "Could we show devotion?",
+                "Should we seek blessing?",
+                "Would prayer help?",
+                "Could we request guidance?",
+                "Might meditation work?",
+                "Should we seek wisdom?",
+                "Could we ask for favor?",
+                "Might ritual help?"
+            ]
+        }
+    },
+    "actions": {
+        "objects": {
+            "dark_mirror": {
+                "name": "the obsidian mirror",
+                "actions": [
+                    "peer into",
+                    "consult with",
+                    "commune through",
+                    "gaze upon",
+                    "reflect in",
+                    "channel through",
+                    "connect via",
+                    "observe through",
+                    "divine through",
+                    "scry with",
+                    "meditate upon",
+                    "focus through",
+                    "contemplate in",
+                    "seek through",
+                    "explore within"
+                ],
+                "valid_results": [
+                    "to see truth.",
+                    "to find wisdom.",
+                    "to gain insight.",
+                    "to seek knowledge.",
+                    "to understand fate.",
+                    "to divine future.",
+                    "to reveal secrets.",
+                    "to unlock mysteries.",
+                    "to discover truth.",
+                    "to find answers.",
+                    "to seek guidance.",
+                    "to gain clarity.",
+                    "to understand self.",
+                    "to reveal path.",
+                    "to find purpose."
+                ]
+            }
+        },
+        "npcs": {
+            "shadow_attendant": {
+                "name": "the shadow attendant",
+                "actions": [
+                    "serve",
+                    "attend to",
+                    "assist",
+                    "support",
+                    "aid",
+                    "help",
+                    "guide",
+                    "direct",
+                    "escort",
+                    "accompany",
+                    "follow",
+                    "lead",
+                    "protect",
+                    "guard",
+                    "watch"
+                ],
+                "valid_results": [
+                    "to ensure comfort.",
+                    "to provide service.",
+                    "to maintain order.",
+                    "to offer assistance.",
+                    "to show respect.",
+                    "to fulfill duty.",
+                    "to serve purpose.",
+                    "to demonstrate loyalty.",
+                    "to provide aid.",
+                    "to ensure satisfaction.",
+                    "to maintain status.",
+                    "to show devotion.",
+                    "to fulfill role.",
+                    "to provide support.",
+                    "to ensure safety."
+                ]
+            }
+        }
+    }
+} 

@@ -1,0 +1,224 @@
+{
+    "conversations": [
+        {
+            "question": "Why are you here?",
+            "answer": "So I can finally wash this moon dust from my <i>crevices</i>."
+        },
+        {
+            "question": "What is this place?",
+            "answer": "We wash, we live, we wash. The <i>cycle</i> begins anew, never-ending."
+        },
+        {
+            "question": "Do I know you?",
+            "answer": "Perhaps you have seen me before? I've certainly seen you. But then again, I see everyone up there on my <i>perch</i>."
+        },
+        {
+            "question": "Do you know who I am?",
+            "answer": "Peer into the <i>shimmering</i> pools. Who do you see staring back, child?"
+        },
+        {
+            "question": "Do you like it here?",
+            "answer": "I do, but even more so at night. So dark, so peaceful, tranquility <i>unmatched</i>. Perfect for a little nap."
+        },
+        {
+            "question": "What are your plans after the sauna?",
+            "answer": "Once I'm <i>done</i> here, I'm tucking into some delectable ayran, hehe."
+        },
+        {
+            "question": "Have I changed?",
+            "answer": "That depends: What do you mean by 'I'? And what exactly do you mean by 'changed'? One meaning can <i>move</i> to another, after all."
+        },
+        {
+            "question": "What can I get from this place?",
+            "answer": "The waters here will cleanse you, <i>through</i> and through."
+        }
+    ],
+    "objects": {
+        "moonlight": {
+            "observations": [
+                "Is moonlight dancing on the water?",
+                "Are the shadows silver-lined tonight?",
+                "Does starlight peek through the windows?",
+                "Is there a celestial glow about?",
+                "Are the pools reflecting moonbeams?",
+                "Does night's essence seep in?",
+                "Is lunar light painting patterns?",
+                "Are the waters gleaming mysteriously?",
+                "Does twilight linger in corners?",
+                "Is there a nocturnal ambiance?",
+                "Are moon shadows playing games?",
+                "Does celestial light illuminate secrets?",
+                "Is evening's glow transforming space?",
+                "Are night's colors bleeding through?",
+                "Does moonlight reveal hidden truths?"
+            ],
+            "causes": [
+                "of lunar cycles?",
+                "of celestial alignment?",
+                "of nocturnal energy?",
+                "of starlight influence?",
+                "of evening's embrace?",
+                "of moon's presence?",
+                "of night's essence?",
+                "of twilight magic?",
+                "of lunar wisdom?",
+                "of celestial dance?",
+                "of nocturnal rhythms?",
+                "of starry guidance?",
+                "of evening's secrets?",
+                "of moon's blessing?",
+                "of night's mystery?"
+            ],
+            "mystical_questions": [
+                "Should we follow lunar wisdom?",
+                "Could celestial timing guide us?",
+                "Might night reveal answers?",
+                "Would moonlight show the way?",
+                "Could starlight illuminate truth?",
+                "Should we seek nocturnal guidance?",
+                "Might evening bring clarity?",
+                "Could twilight share secrets?",
+                "Should we trust lunar intuition?",
+                "Would night's wisdom help?",
+                "Could moon phases guide us?",
+                "Might celestial signs direct us?",
+                "Should we embrace night's counsel?",
+                "Could evening's peace reveal?",
+                "Might lunar knowledge aid us?"
+            ]
+        },
+        "reflection_pool": {
+            "observations": [
+                "Is the water showing more than reflections?",
+                "Do ripples tell stories?",
+                "Are the pools whispering secrets?",
+                "Does still water reveal truth?",
+                "Are memories floating in pools?",
+                "Do reflections shift meanings?",
+                "Is wisdom rippling through?",
+                "Are answers surfacing slowly?",
+                "Does water hold ancient knowledge?",
+                "Are insights swimming beneath?",
+                "Do pools mirror inner truth?",
+                "Are revelations floating up?",
+                "Does clarity rise with steam?",
+                "Are mysteries dissolving here?",
+                "Do reflections show futures?"
+            ],
+            "causes": [
+                "of water's wisdom?",
+                "of liquid memory?",
+                "of flowing knowledge?",
+                "of pool's insight?",
+                "of aqueous truth?",
+                "of rippling revelation?",
+                "of watery reflection?",
+                "of fluid understanding?",
+                "of pooled awareness?",
+                "of liquid consciousness?",
+                "of streaming thought?",
+                "of flowing insight?",
+                "of water's knowing?",
+                "of pool's memory?",
+                "of liquid wisdom?"
+            ],
+            "mystical_questions": [
+                "Should we trust the waters?",
+                "Could reflections guide us?",
+                "Might ripples reveal truth?",
+                "Would still waters speak?",
+                "Could pools share wisdom?",
+                "Should we seek water's counsel?",
+                "Might reflection bring insight?",
+                "Could water show the way?",
+                "Should we listen to pools?",
+                "Would water's wisdom help?",
+                "Could liquid knowledge flow?",
+                "Might pools mirror truth?",
+                "Should we trust reflections?",
+                "Could water clarify paths?",
+                "Might pools reveal destiny?"
+            ]
+        }
+    },
+    "actions": {
+        "objects": {
+            "moon_basin": {
+                "name": "the moon-touched basin",
+                "actions": [
+                    "gaze into",
+                    "reflect upon",
+                    "contemplate within",
+                    "meditate beside",
+                    "observe through",
+                    "commune with",
+                    "ponder over",
+                    "study within",
+                    "examine through",
+                    "consider in",
+                    "explore through",
+                    "witness within",
+                    "perceive through",
+                    "understand via",
+                    "discover through"
+                ],
+                "valid_results": [
+                    "to find inner truth.",
+                    "to gain wisdom.",
+                    "to achieve clarity.",
+                    "to understand self.",
+                    "to discover meaning.",
+                    "to reveal purpose.",
+                    "to find direction.",
+                    "to gain insight.",
+                    "to see clearly.",
+                    "to know truth.",
+                    "to understand path.",
+                    "to find answers.",
+                    "to achieve peace.",
+                    "to gain knowledge.",
+                    "to discover self."
+                ]
+            }
+        },
+        "npcs": {
+            "night_keeper": {
+                "name": "the keeper of night",
+                "actions": [
+                    "seek wisdom from",
+                    "learn from",
+                    "listen to",
+                    "observe with",
+                    "understand through",
+                    "contemplate with",
+                    "share silence with",
+                    "receive guidance from",
+                    "gain insight from",
+                    "find truth with",
+                    "discover through",
+                    "reflect with",
+                    "meditate alongside",
+                    "commune with",
+                    "explore wisdom with"
+                ],
+                "valid_results": [
+                    "to understand cycles.",
+                    "to find peace.",
+                    "to gain wisdom.",
+                    "to achieve balance.",
+                    "to know truth.",
+                    "to find harmony.",
+                    "to understand time.",
+                    "to achieve clarity.",
+                    "to find meaning.",
+                    "to gain insight.",
+                    "to discover purpose.",
+                    "to understand self.",
+                    "to find direction.",
+                    "to achieve understanding.",
+                    "to know path."
+                ]
+            }
+        }
+    }
+}

@@ -1,22 +1,52 @@
 {
+    "conversations": [
+        {
+            "question": "How do you feel?",
+            "answer": "I'm jussssst sssso wound up, hehe <i>coiled</i> like a viper."
+        },
+        {
+            "question": "What is she saying to her snake tail?",
+            "answer": "I'd love to ssssay it's you but it'sssss probably meeee. you, me, sesame snake I supppossssse."
+        },
+        {
+            "question": "How do you relax?",
+            "answer": "Proooo gresssssive <i>mussssssssscle</i>, relaaaa aaaa aaaxxxaAAACHOO!"
+        },
+        {
+            "question": "What is your advice to people who are stressed?",
+            "answer": "Breathhh innnnn, (rattles) and breath outtttt (rattles)"
+        },
+        {
+            "question": "What is one regret you have?",
+            "answer": "why didn't you do yoga like your <i>mother</i> ssssaid Maran. Rebellioussssss teen turned ssssstiff queen. Letsss open up thosssse jointsssss"
+        },
+        {
+            "question": "Do snakes even enjoy saunas?",
+            "answer": "Ugh, all this ssssteam, I <i>feel</i> like I can't breath, wish I had more ssssweat glandsss but I just had new sssscales put in."
+        },
+        {
+            "question": "Do you like this Hammam?",
+            "answer": "Tasting the airs useless here, all I taste is lavender oil, limessssscale and 100 year old mould. Not to mention everyone elses ssssssodding sweat."
+        }
+    ],
     "objects": {
         "water_system": {
             "observations": [
-                "is the fountain doing an interpretive dance with its water pressure?",
-                "does the fountain sound like it's humming an ancient Turkish lullaby?",
-                "are the pipes performing an impromptu percussion concert?",
-                "is the water playing hide and seek with warmth?",
-                "has the water decided to experiment with new colour palettes?",
-                "is the water flow doing the cha-cha?",
-                "are there tiny air bubble ballet dancers in the water?",
-                "is the system playing 'spot the leak'?",
-                "is the pump trying to outshine an opera singer?",
-                "is the pressure playing musical chairs?",
-                "has the water been sneaking sips from a hot tea kettle?",
-                "are the taps staging a rebellion?",
-                "is there an aromatic mystery in our water?",
-                "are the pressure gauges doing the hokey pokey?",
-                "is the fountain attempting a career in water sports?"
+                "Is the fountain doing an interpretive dance with its water pressure?",
+                "Does the fountain sound like it's humming an ancient Turkish lullaby?",
+                "Are the pipes performing an impromptu percussion concert?",
+                "Is the water playing hide and seek with warmth?",
+                "Has the water decided to experiment with new colour palettes?",
+                "Is the water flow doing the cha-cha?",
+                "Are there tiny air bubble ballet dancers in the water?",
+                "Is the system playing 'spot the leak'?",
+                "Is the pump trying to outshine an opera singer?",
+                "Is the pressure playing musical chairs?",
+                "Has the water been sneaking sips from a hot tea kettle?",
+                "Are the taps staging a rebellion?",
+                "Is there an aromatic mystery in our water?",
+                "Are the pressure gauges doing the hokey pokey?",
+                "Is the fountain attempting a career in water sports?"
             ],
             "causes": [
                 "of the pipes having a mid-life crisis?",
@@ -25,7 +55,7 @@
                 "of the pump deciding to take an unscheduled siesta?",
                 "of a seal eloping with its neighbouring gasket?",
                 "of the water tank going on a diet?",
-                "of air bubbles hosting a party in there?",
+                "of air bubbles <i>hosting</i> a party in there?",
                 "of the pipes developing a rust fashion statement?",
                 "of the filter becoming a hermit?",
                 "of the power supply playing peek-a-boo?",
@@ -55,21 +85,21 @@
         },
         "tiles": {
             "observations": [
-                "are these tiles trying to go incognito without their shine?",
-                "do the tiles think they're a Turkish coffee warmer?",
-                "are the tiles playing connect-the-cracks?",
-                "is the grout attempting a great escape?",
-                "do the tiles look like they've been tie-dying themselves?",
-                "are the edges doing yoga poses?",
-                "are some tiles planning a midnight escape?",
-                "have the tiles joined an ice skating competition?",
-                "are the patterns playing hide and seek?",
-                "is someone drawing mysterious hieroglyphs on the surface?",
-                "are the tiles trying to become perfumers?",
-                "are the tiles practicing their dance moves?",
-                "is there a secret tile spa treatment happening?",
-                "are the tiles playing mountain ranges?",
-                "have the tiles joined a polar expedition?"
+                "Are these tiles trying to go incognito without their shine?",
+                "Do the tiles think they're a Turkish coffee warmer?",
+                "Are the tiles playing connect-the-cracks?",
+                "Is the grout attempting a great escape?",
+                "Do the tiles look like they've been tie-dying themselves?",
+                "Are the edges doing yoga poses?",
+                "Are some tiles planning a midnight escape?",
+                "Have the tiles joined an ice skating competition?",
+                "Are the patterns playing hide and seek?",
+                "Is someone drawing mysterious hieroglyphs on the surface?",
+                "Are the tiles trying to become perfumers?",
+                "Are the tiles practicing their dance moves?",
+                "Is there a secret tile spa treatment happening?",
+                "Are the tiles playing mountain ranges?",
+                "Have the tiles joined a polar expedition?"
             ],
             "causes": [
                 "of our maintenance falling behind time?",
@@ -108,21 +138,21 @@
         },
         "towels": {
             "observations": [
-                "have our towels become quite worn out?",
-                "do the towels feel rough to the touch?",
-                "are there fraying edges on the towels?",
-                "do the towels appear faded in colour?",
-                "are the towels taking longer to dry?",
-                "are there holes appearing in the towels?",
-                "do the towels smell damp?",
-                "are the towels shrinking after washing?",
-                "are there stains that won't come out?",
-                "do the towels feel thinner than before?",
-                "are some towels missing from inventory?",
-                "are there tears in the fabric?",
-                "do the towels feel less absorbent?",
-                "are the towels piling excessively?",
-                "do the towels lose fibres during use?"
+                "Have our towels become quite worn out?",
+                "Do the towels feel rough to the touch?",
+                "Are there fraying edges on the towels?",
+                "Do the towels appear faded in colour?",
+                "Are the towels taking longer to dry?",
+                "Are there holes appearing in the towels?",
+                "Do the towels smell damp?",
+                "Are the towels shrinking after washing?",
+                "Are there stains that won't come out?",
+                "Do the towels feel thinner than before?",
+                "Are some towels missing from inventory?",
+                "Are there tears in the fabric?",
+                "Do the towels feel less absorbent?",
+                "Are the towels piling excessively?",
+                "Do the towels lose fibres during use?"
             ],
             "causes": [
                 "of the new cleaning crew's schedule?",
@@ -169,21 +199,21 @@
         },
         "steam_system": {
             "observations": [
-                "is the steam flow weaker than before?",
-                "does the steam smell unusual?",
-                "is there a noise coming from the pipes?",
-                "is the steam temperature inconsistent?",
-                "are there visible leaks in the system?",
-                "does the boiler make unusual sounds?",
-                "is the steam output delayed after activation?",
-                "are there pressure fluctuations in the gauge?",
-                "does the steam seem denser than usual?",
-                "is the steam room warming up slower?",
-                "are steam vents clogged or dirty?",
-                "is there condensation forming in odd places?",
-                "are the controls responding poorly?",
-                "is the steam room more humid than before?",
-                "is the safety valve releasing pressure excessively?"
+                "Is the steam flow weaker than before?",
+                "Does the steam smell unusual?",
+                "Is there a noise coming from the pipes?",
+                "Is the steam temperature inconsistent?",
+                "Are there visible leaks in the system?",
+                "Does the boiler make unusual sounds?",
+                "Is the steam output delayed after activation?",
+                "Are there pressure fluctuations in the gauge?",
+                "Does the steam seem denser than usual?",
+                "Is the steam room warming up slower?",
+                "Are steam vents clogged or dirty?",
+                "Is there condensation forming in odd places?",
+                "Are the controls responding poorly?",
+                "Is the steam room more humid than before?",
+                "Is the safety valve releasing pressure excessively?"
             ],
             "causes": [
                 "of our maintenance falling behind time?",
@@ -228,24 +258,25 @@
             ]
         }
     },
-    "question_structure": "observation] Is it because [cause] [mystical_question]",
+    "question_structure": "[observation] Is it because [cause]",
+    "response_structure": "[acknowledgement] [outcome] [speculation]",
     "responses": {
         "acknowledgements": [
-            "you've uncovered something crucial.",
-            "that explains these strange events.",
-            "the mystery grows ever deeper.",
+            "You've uncovered something crucial.",
+            "That explains these strange events.",
+            "The mystery grows ever deeper.",
             "I sensed something wasn't right.",
-            "your wisdom shines through today.",
-            "that's a keen observation on your part.",
-            "you may have solved part of the puzzle.",
-            "this sheds light on the situation.",
-            "your insight is invaluable here.",
-            "that points us in the right direction.",
-            "you've made an excellent deduction.",
-            "this aligns with what I suspected.",
-            "your observation is remarkably accurate.",
-            "that clarifies a lot of things.",
-            "you've proven to be very perceptive."
+            "Your wisdom shines through today.",
+            "That's a keen observation on your part.",
+            "You may have solved part of the puzzle.",
+            "This sheds light on the situation.",
+            "Your insight is invaluable here.",
+            "That points us in the right direction.",
+            "You've made an excellent deduction.",
+            "This aligns with what I suspected.",
+            "Your observation is remarkably accurate.",
+            "That clarifies a lot of things.",
+            "You've proven to be very perceptive."
         ],
         "outcomes": {
             "water_system": {
@@ -360,7 +391,24 @@
                     "Residual soap may be hardening fibres.",
                     "A supplier audit might reveal inconsistencies."
                 ],
-                "right_items": ["storage"]
+                "right_items": ["storage"],
+                "speculations": [
+                    "Perhaps we should review our storage practices.",
+                    "The storage conditions might need improvement.",
+                    "We might need to reorganize our storage system.",
+                    "Better inventory tracking could help.",
+                    "A storage audit might reveal more issues.",
+                    "The storage area ventilation could be inadequate.",
+                    "We might need additional storage space.",
+                    "Storage temperature control might help.",
+                    "Better storage organization could prevent damage.",
+                    "Regular storage inspections might be necessary.",
+                    "The storage humidity levels might need monitoring.",
+                    "We could implement a better rotation system.",
+                    "Storage shelving might need upgrading.",
+                    "A new storage management system could help.",
+                    "Better storage labeling might prevent mishandling."
+                ]
             },
             "steam_system": {
                 "left": [
@@ -400,24 +448,7 @@
                 ],
                 "right_items": ["boiler", "steam_valve"]
             }
-        },
-        "speculations": [
-            "Let's take a closer look and see what we uncover.",
-            "Maybe there's something nearby we can check.",
-            "This might be worth investigating further.",
-            "We should ask someone who might know more.",
-            "Perhaps there's a tool we can use to fix this.",
-            "A second opinion could prove helpful.",
-            "We might find clues in the maintenance logs.",
-            "Let's test our assumptions before proceeding.",
-            "We could perform a temporary fix for now.",
-            "It's possible a small adjustment will resolve this.",
-            "We should document everything as we investigate.",
-            "Exploring related areas might provide insights.",
-            "Testing the system under different conditions could help.",
-            "Asking a specialist could be the best course of action.",
-            "Let's revisit this after gathering more data."
-        ]
+        }
     },
     "actions": {
         "objects": {

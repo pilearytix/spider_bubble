@@ -1,0 +1,138 @@
+:: StoryTitle
+Hammam Mystery
+
+:: StoryData
+{
+    "ifid": "HAMMAM-MYSTERY-2025",
+    "format": "Harlowe",
+    "format-version": "3.3.5",
+    "start": "Start",
+    "tag-colors": {},
+    "zoom": 1
+}
+
+:: Start [pos:100,100]
+Welcome to the Hammam
+[[Start a conversation->Conversation Hub]]
+[[Inspect the environment->Environment Hub]]
+
+:: Conversation 1 [pos:300,200]
+How do you feel?
+
+I'm jussssst sssso wound up, hehe <i>coiled</i> like a viper.
+
+[[Return to conversations->Conversation Hub]]
+
+:: Conversation 2 [pos:350,250]
+What is she saying to her snake tail?
+
+I'd love to ssssay it's you but it'sssss probably meeee. you, me, sesame snake I supppossssse.
+
+[[Return to conversations->Conversation Hub]]
+
+:: Conversation 3 [pos:400,300]
+How do you relax?
+
+Proooo gresssssive mussssssssscle, relaaaa aaaa aaaxxxaAAACHOO!
+
+[[Return to conversations->Conversation Hub]]
+
+:: Conversation 4 [pos:450,350]
+What is your advice to people who are stressed?
+
+Breathhh innnnn, (rattles) and breath outtttt (rattles)
+
+[[Return to conversations->Conversation Hub]]
+
+:: Conversation 5 [pos:500,400]
+What is one regret you have?
+
+why didn't you do yoga like your <i>mother</i> ssssaid Maran. Rebellioussssss teen turned ssssstiff queen. Letsss open up thosssse jointsssss
+
+[[Return to conversations->Conversation Hub]]
+
+:: Conversation 6 [pos:550,450]
+Do snakes even enjoy saunas?
+
+Ugh, all this ssssteam, I feel like I can't breath, wish I had more ssssweat glandsss but I just had new sssscales put in.
+
+[[Return to conversations->Conversation Hub]]
+
+:: Conversation 7 [pos:600,500]
+Do you like this Hammam?
+
+Tasting the airs useless here, all I taste is lavender oil, limessssscale and 100 year old mould. Not to mention everyone elses ssssssodding sweat.
+
+[[Return to conversations->Conversation Hub]]
+
+:: Conversation Hub [pos:200,150]
+[[How do you feel?->Conversation 1]]
+[[What is she saying to her snake tail?->Conversation 2]]
+[[How do you relax?->Conversation 3]]
+[[What is your advice to people who are stressed?->Conversation 4]]
+[[What is one regret you have?->Conversation 5]]
+[[Do snakes even enjoy saunas?->Conversation 6]]
+[[Do you like this Hammam?->Conversation 7]]
+
+[[Return to start->Start]]
+
+:: Water System Inspection [pos:400,200]
+You examine the water system...
+
+Are the taps staging a rebellion?
+of the water system finally hitting retirement age?
+Does this align with the lunar cycle?
+
+
+[[Return to environment->Environment Hub]]
+
+:: Tiles Inspection [pos:400,300]
+You examine the tiles...
+
+Are some tiles planning a midnight escape?
+of our maintenance falling behind time?
+Might this damage our reputation?
+
+
+[[Return to environment->Environment Hub]]
+
+:: Towels Inspection [pos:400,400]
+You examine the towels...
+
+Do the towels feel rough to the touch?
+of using harsh chemicals during cleaning?
+Should we reconsider our laundry system?
+
+Possible actions:
+- Replace towels
+- Investigate towel usage
+- Check towel inventory
+- Review towel laundering process
+- Adjust towel drying schedule
+- Check towel storage conditions
+
+[[Return to environment->Environment Hub]]
+
+:: Steam System Inspection [pos:400,500]
+You examine the steam system...
+
+Is the steam room warming up slower?
+of a malfunctioning thermostat?
+Is this a temporary anomaly?
+
+Possible actions:
+- Call maintenance immediately
+- Investigate the steam system
+- Check the boiler for leaks
+- Replace the boiler
+- Clean the steam vents
+
+[[Return to environment->Environment Hub]]
+
+:: Environment Hub [pos:200,300]
+[[Inspect water system->Water System Inspection]]
+[[Inspect tiles->Tiles Inspection]]
+[[Inspect towels->Towels Inspection]]
+[[Inspect steam system->Steam System Inspection]]
+
+[[Return to start->Start]]

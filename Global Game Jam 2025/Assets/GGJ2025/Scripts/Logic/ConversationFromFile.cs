@@ -19,60 +19,24 @@ using System;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using AC;
+using GGJ2025.Models;
+using GGJ2025.Systems;
+using GGJ2025.Utils;
 
 namespace GGJ2025
 {    
 	[Serializable]
-	public enum ConversationStage
-	{
-		Question,
-		Response,
-		Action
-	}
-	
-	[Serializable]
 	public class ButtonDialogExtended : AC.ButtonDialog 
 	{
 		public object customData;
-		
-		public ButtonDialogExtended(int[] idArray) : base(idArray) { }
-	}
+		public bool hasBeenUsed;
 
-	// Move interface declaration to namespace level
-	public interface IConversationSystem
-	{
-		void ShowOptions(IEnumerable<ButtonDialogExtended> options);
-		void HideOptions();
-		void RefreshUI();
-	}
-
-	// Default implementation
-	public class AdventureCreatorConversationSystem : IConversationSystem
-	{
-		public void ShowOptions(IEnumerable<ButtonDialogExtended> options)
+		public ButtonDialogExtended(int[] idArray) : base(idArray) 
 		{
-			if (AC.KickStarter.playerMenus != null)
-			{
-				AC.KickStarter.playerMenus.RefreshDialogueOptions();
-			}
-		}
-
-		public void HideOptions()
-		{
-			if (AC.KickStarter.playerInput != null)
-			{
-				AC.KickStarter.playerInput.EndConversation();
-			}
-		}
-
-		public void RefreshUI()
-		{
-			if (AC.KickStarter.playerMenus != null)
-			{
-				AC.KickStarter.playerMenus.RefreshDialogueOptions();
-			}
+			hasBeenUsed = false;
 		}
 	}
+
 
 	/**
 	 * This component provides the player with a list of dialogue options that their character can say.
@@ -105,58 +69,68 @@ namespace GGJ2025
 			{
 				AC.ACDebug.Log($"Intercepting conversation click with optionID: {optionID}", this);
 
-				ButtonDialogExtended buttonDialog = GetOptionWithID(optionID) as ButtonDialogExtended;
-				ConversationOptionData optionData = buttonDialog?.customData as ConversationOptionData;
-
-				// log the option data
-				AC.ACDebug.Log($"Option data: {optionData}", this);
-
-				// Handle the option based on its type
-				switch (stage)
+				// Find and mark the clicked option as used
+				ButtonDialogExtended buttonDialog = null;
+				foreach (var option in options)
 				{
-					case ConversationStage.Question:
-						stage = ConversationStage.Response;
-						AC.ACDebug.Log("Transitioning to Response stage", this);
-						LoadResponseOptions(optionData);
-						break;
+					if (option.ID == optionID && option is ButtonDialogExtended extendedOption)
+					{
+						buttonDialog = extendedOption;
+						buttonDialog.hasBeenUsed = true;
+						AC.ACDebug.Log($"Marked option '{option.label}' as used", this);
 
-					case ConversationStage.Response:
-						stage = ConversationStage.Action;
-						AC.ACDebug.Log("Transitioning to Action stage", this);
-						LoadActionOptions(optionData);
-						break;
+						// get the title of the option and check if it contains <i>
+						if (option.label.Contains("<i>"))
+						{
+							// get the text between <i> and </i>
+							var textBetweenTags = option.label.Substring(option.label.IndexOf("<i>") + 3, option.label.IndexOf("</i>") - option.label.IndexOf("<i>") - 3);
+							AC.ACDebug.Log($"Text between tags: {textBetweenTags}", this);
 
-					case ConversationStage.Action:
-						stage = ConversationStage.Question;
-						ExecuteAction(optionData);
-						AC.ACDebug.Log("Returning to Question stage", this);
-						LoadConversationFromJson();
+							// Find the item in the inventory manager
+							AC.InvItem itemToAdd = AC.KickStarter.inventoryManager.GetItem(textBetweenTags);
+							if (itemToAdd != null)
+							{
+								// Add the item to the player's inventory using the item's ID
+								AC.KickStarter.runtimeInventory.Add(itemToAdd.id);
+								AC.ACDebug.Log($"Added item '{textBetweenTags}' to player's inventory", this);
+							}
+							else
+							{
+								AC.ACDebug.LogWarning($"Could not find item '{textBetweenTags}' in inventory manager", this);
+							}
+						}
+
 						break;
+					}
 				}
-			
-				
-				// conversation.options.Clear();
-				// if(stage == ConversationStage.Question) 
-				// {
-				// 	stage = ConversationStage.Response;
-				// }
-				
-				// // Only load new options if we don't have any or if this is a new conversation
-				// if (options.Count == 0 || AC.KickStarter.playerInput.activeConversation != this)
-				// {
-				// 	LoadConversationFromJson();
-				// }
 
-				// // Verify the option exists before running it
-				// if (GetOptionWithID(optionID) != null)
-				// {
-				// 	RunOption(optionID);
-				// 	AC.KickStarter.playerMenus?.RefreshDialogueOptions();
-				// }
-				// else
-				// {
-				// 	AC.ACDebug.LogWarning($"Invalid option ID: {optionID}", this);
-				// }
+				if (buttonDialog != null)
+				{
+					var optionData = buttonDialog.customData as ConversationOptionData;
+					AC.ACDebug.Log($"Option data: {optionData}", this);
+
+					if (optionData?.type == "leave")
+					{
+						// End the conversation
+						AC.KickStarter.eventManager.Call_OnEndConversation(this);
+						return;
+					}
+					else if (optionData?.type == "response")
+					{
+						// After showing response, return to question stage
+						stage = ConversationStage.Question;
+						UpdateOptionVisibility();
+					}
+					else if (optionData?.type == "simple")
+					{
+						AC.ACDebug.Log($"Simple conversation option data: {optionData}", this);
+						ExecuteSimpleConversation(optionData);
+					}
+					else if (optionData?.type == "question")
+					{
+						LoadResponseOptions(optionData);
+					}
+				}
 			}
 		}
 
@@ -168,7 +142,7 @@ namespace GGJ2025
 		[SerializeField] private bool loadFromJson = false;
 		[SerializeField] private ConversationStage stage = ConversationStage.Question;
 
-		private ConversationData jsonData;
+		private GGJ2025.Models.JsonConversationData jsonData;
 		private int lastGeneratedId = 0;  // Track the last generated ID
 
 		private readonly Dictionary<ConversationStage, Action<ConversationOptionData>> stageHandlers;
@@ -220,620 +194,13 @@ namespace GGJ2025
 
 		#endregion
 
-
-		#region PublicFunctions
-
-		/**
-		 * <summary>Checks if the Conversation is currently active.</summary>
-		 * <param name = "includeResponses">If True, then the Conversation will be considered active if any of its dialogue option ActionLists are currently-running, as opposed to only when its options are displayed as choices on screen</param>
-		 * </returns>True if the Conversation is active</returns>
-		 */
-		public new bool IsActive (bool includeResponses)
-		{
-			AC.ACDebug.Log($"[ConversationFromFile] IsActive called with includeResponses: {includeResponses}", this);
-			if (AC.KickStarter.playerInput.activeConversation == this ||
-				AC.KickStarter.playerInput.PendingOptionConversation == this)
-			{
-				return true;
-			}
-
-			if (includeResponses)
-			{
-				foreach (AC.ButtonDialog buttonDialog in options)
-				{
-					if (AC.KickStarter.actionListManager.IsListRunning (buttonDialog.dialogueOption))
-					{
-						return true;
-					}
-				}
-			}
-			return false;
-		}
-
-
-		/** Hides the Conversation's dialogue options, if it is the currently-active Conversation. */
-		public new void TurnOff ()
-		{
-			AC.ACDebug.Log("[ConversationFromFile] TurnOff called", this);
-			if (AC.KickStarter.playerInput && AC.KickStarter.playerInput.activeConversation == this)
-			{
-				CancelInvoke ("RunDefault");
-				AC.KickStarter.playerInput.EndConversation ();
-			}
-		}
-
-
-		/**
-		 * <summary>Runs a dialogue option.</summary>
-		 * <param name = "slot">The index number of the dialogue option to run</param>
-		 * <param name = "force">If True, then the option will be run regardless of whether it's enabled or valid</param>
-		 */
-		public new void RunOption(int slot, bool force = false)
-		{
-			AC.ACDebug.Log($"[ConversationFromFile] RunOption called with slot: {slot}, force: {force}", this);
-			int i = ConvertSlotToOption(slot, force);
-			if (i == -1 || i >= options.Count)
-			{
-				AC.ACDebug.LogWarning($"Invalid slot {slot} or option index {i}", this);
-				return;
-			}
-
-			CancelInvoke("RunDefault");
-			
-			AC.ButtonDialog buttonDialog = options[i];
-			if (force || options.Contains(buttonDialog))
-			{
-				if (buttonDialog is ButtonDialogExtended extendedDialog)
-				{
-					AC.ACDebug.Log($"Running extended dialog option with ID: {extendedDialog.ID}", this);
-					RunOption(extendedDialog);
-				}
-				else
-				{
-					AC.ACDebug.Log($"Running base dialog option with ID: {buttonDialog.ID}", this);
-					base.RunOption(buttonDialog);
-				}
-			}
-		}
-
-
-		/**
-		 * <summary>Runs a dialogue option with a specific ID.</summary>
-		 * <param name = "ID">The ID number of the dialogue option to run</param>
-		 * <param name = "force">If True, then the option will be run regardless of whether it's enabled or valid</param>
-		 */
-		public new void RunOptionWithID (int ID, bool force = false)
-		{
-			AC.ACDebug.Log($"[ConversationFromFile] RunOptionWithID called with ID: {ID}, force: {force}", this);
-			AC.ButtonDialog buttonDialog = GetOptionWithID (ID);
-			if (buttonDialog == null) return;
-
-			if (!buttonDialog.isOn && !force) return;
-
-			CancelInvoke ("RunDefault");
-
-			if (!gameObject.activeInHierarchy || force || interactionSource == AC.InteractionSource.CustomScript)
-			{
-				RunOption (buttonDialog);
-			}
-			else
-		
-			{
-				AC.KickStarter.playerInput.StartCoroutine (AC.KickStarter.playerInput.DelayConversation (this, () => RunOption (buttonDialog)));
-			}
-
-			AC.KickStarter.playerInput.activeConversation = null;
-
-			if (overrideActiveList != null)
-			{
-				AC.KickStarter.eventManager.Call_OnEndConversation (this);
-			}
-		}
-
-
-		/**
-		 * <summary>Gets the time remaining before a timed Conversation ends.</summary>
-		 * <returns>The time remaining before a timed Conversation ends.</returns>
-		 */
-		public new float GetTimeRemaining ()
-		{
-			return ((startTime + timer - Time.time) / timer);
-		}
-
-
-		/**
-		 * <summary>Checks if a given slot exists</summary>
-		 * <param name = "slot">The index number of the enabled dialogue option to find</param>
-		 * <returns>True if a given slot exists</returns>
-		 */
-		public new bool SlotIsAvailable (int slot)
-		{
-			int i = ConvertSlotToOption (slot);
-			return (i >= 0 && i < options.Count);
-		}
-
-
-		/**
-		 * <summary>Gets the ID of a dialogue option.</summary>
-		 * <param name = "slot">The index number of the enabled dialogue option to find</param>
-		 * <returns>The dialogue option's ID number, if found - or -1 otherwise.</returns>
-		 */
-		public new int GetOptionID (int slot)
-		{
-			int i = ConvertSlotToOption (slot);
-			if (i >= 0 && i < options.Count)
-			{
-				return options[i].ID;
-			}
-			return -1;
-		}
-
-
-		/**
-		 * <summary>Gets the display label of a dialogue option.</summary>
-		 * <param name = "slot">The index number of the enabled dialogue option to find</param>
-		 * <returns>The display label of the dialogue option</returns>
-		 */
-		public new string GetOptionName (int slot)
-		{
-			int i = ConvertSlotToOption (slot);
-			if (i == -1)
-			{
-				i = 0;
-			}
-
-			string translatedLine = AC.KickStarter.runtimeLanguages.GetTranslation (options[i].label, options[i].lineID, AC.Options.GetLanguage (), GetTranslationType (0));
-			return AC.AdvGame.ConvertTokens (translatedLine).Replace ("\\n", "\n");
-		}
-
-
-		/**
-		 * <summary>Gets the display label of a dialogue option with a specific ID.</summary>
-		 * <param name = "ID">The ID of the dialogue option to find</param>
-		 * <returns>The display label of the dialogue option</returns>
-		 */
-		public new string GetOptionNameWithID (int ID)
-		{
-			AC.ButtonDialog buttonDialog = GetOptionWithID (ID);
-			if (buttonDialog == null) return null;
-
-			string translatedLine = AC.KickStarter.runtimeLanguages.GetTranslation (buttonDialog.label, buttonDialog.lineID, AC.Options.GetLanguage (), GetTranslationType (0));
-			return AC.AdvGame.ConvertTokens (translatedLine).Replace ("\\n", "\n");
-		}
-
-
-		/**
-		 * <summary>Gets the display icon of a dialogue option.</summary>
-		 * <param name = "slot">The index number of the dialogue option to find</param>
-		 * <returns>The display icon of the dialogue option</returns>
-		 */
-		public new AC.CursorIconBase GetOptionIcon (int slot)
-		{
-			int i = ConvertSlotToOption (slot);
-			if (i == -1)
-			{
-				i = 0;
-			}
-			return options[i].cursorIcon;
-		}
-
-
-		/**
-		 * <summary>Gets the display icon of a dialogue option with a specific ID.</summary>
-		 * <param name = "ID">The ID of the dialogue option to find</param>
-		 * <returns>The display icon of the dialogue option</returns>
-		 */
-		public new AC.CursorIconBase GetOptionIconWithID (int ID)
-		{
-			AC.ButtonDialog buttonDialog = GetOptionWithID (ID);
-			if (buttonDialog == null) return null;
-			return buttonDialog.cursorIcon;
-		}
-
-
-		/**
-		 * <summary>Gets the ButtonDialog data container, which stores data for a dialogue option.</summary>
-		 * <param name = "slot">The index number of the dialogue option to find</param>
-		 * <returns>The ButtonDialog data container</returns>
-		 */
-		public new  AC.ButtonDialog GetOption (int slot)
-		{
-			int i = ConvertSlotToOption (slot);
-			if (i == -1)
-			{
-				i = 0;
-			}
-			return options[i];
-		}
-
-
-		/**
-		 * <summary>Gets the ButtonDialog data container with a given ID number, which stores data for a dialogue option.</summary>
-		 * <param name = "id">The ID number associated with the dialogue option to find</param>
-		 * <returns>The ButtonDialog data container</returns>
-		 */
-		public new AC.ButtonDialog GetOptionWithID (int id)
-		{
-			for (int i=0; i<options.Count; i++)
-			{
-				if (options[i].ID == id)
-				{
-					return options[i];
-				}
-			}
-			return null;
-		}
-
-
-		/**
-		 * <summary>Gets the number of dialogue options that are currently enabled.</summary>
-		 * <returns>The number of currently-enabled dialogue options</returns>
-		 */
-		public new int GetNumEnabledOptions ()
-		{
-			int num = 0;
-			for (int i=0; i<options.Count; i++)
-			{
-				if (options[i].isOn)
-				{
-					num++;
-				}
-			}
-			return num;
-		}
-
-
-		/**
-		 * <summary>Checks if a dialogue option has been chosen at least once by the player.</summary>
-		 * <param name = "slot">The index number of the dialogue option to find</param>
-		 * <returns>True if the dialogue option has been chosen at least once by the player.</returns>
-		 */
-		public new bool OptionHasBeenChosen (int slot)
-		{
-			int i = ConvertSlotToOption (slot);
-			if (i == -1)
-			{
-				i = 0;
-			}
-			return options[i].hasBeenChosen;
-		}
-
-
-		/**
-		 * <summary>Un-marks a specific dialogue option as having been chosen by the player.</summary>
-		 * <param name="ID">The ID of the dialogue option</param>
-		 */
-		public new void UnmarkAsChosen (int ID)
-		{
-			AC.ButtonDialog buttonDialog = GetOptionWithID (ID);
-			if (buttonDialog == null) return;
-			buttonDialog.hasBeenChosen = false;
-		}
-
-
-		/** Un-marks all dialogue options as having been chosen by the player. */
-		public new void UnmarkAllAsChosen ()
-		{
-			foreach (AC.ButtonDialog buttonDialog in options)
-			{
-				buttonDialog.hasBeenChosen = false;
-			}
-		}
-
-
-		/**
-		 * <summary>Checks if a dialogue option with a specific ID has been chosen at least once by the player.</summary>
-		 * <param name = "ID">The ID of the dialogue option to find</param>
-		 * <returns>True if the dialogue option has been chosen at least once by the player.</returns>
-		 */
-		public new bool OptionWithIDHasBeenChosen (int ID)
-		{
-			AC.ButtonDialog buttonDialog = GetOptionWithID (ID);
-			if (buttonDialog == null) return false;
-			return buttonDialog.hasBeenChosen;
-		}
-
-
-		/** 
-		 * <summary>Checks if all options have been chosen at least once by the player</summary>
-		 * <param name = "onlyEnabled">If True, then only options that are currently enabled will be included in the check</param>
-		 * <returns>True if all options have been chosen at least once by the player</returns>
-		 */
-		public new bool AllOptionsBeenChosen (bool onlyEnabled)
-		{
-			foreach (AC.ButtonDialog option in options)
-			{
-				if (!option.hasBeenChosen)
-				{
-					if (onlyEnabled && !option.isOn)
-					{
-						continue;
-					}
-					return false;
-				}
-			}
-			return true;
-		}
-
-
-		/**
-		 * <summary>Turns a dialogue option on, provided that it is unlocked.</summary>
-		 * <param name = "id">The ID number of the dialogue option to enable</param>
-		 */
-		public new void TurnOptionOn (int id)
-		{
-			foreach (AC.ButtonDialog option in options)
-			{
-				if (option.ID == id)
-				{
-					if (!option.isLocked)
-					{
-						option.isOn = true;
-					}
-					else
-					{
-						AC.ACDebug.Log (gameObject.name + "'s option '" + option.label + "' cannot be turned on as it is locked.", this);
-					}
-					return;
-				}
-			}
-		}
-
-
-		/**
-		 * <summary>Turns a dialogue option off, provided that it is unlocked.</summary>
-		 * <param name = "id">The ID number of the dialogue option to disable</param>
-		 */
-		public new void TurnOptionOff (int id)
-		{
-			foreach (AC.ButtonDialog option in options)
-			{
-				if (option.ID == id)
-				{
-					if (!option.isLocked)
-					{
-						option.isOn = false;
-					}
-					else
-					{
-						AC.ACDebug.LogWarning (gameObject.name + "'s option '" + option.label + "' cannot be turned off as it is locked.", this);
-					}
-					return;
-				}
-			}
-		}
-
-
-		/**
-		 * <summary>Sets the enabled and locked states of a dialogue option, provided that it is unlocked.</summary>
-		 * <param name = "id">The ID number of the dialogue option to change</param>
-		 * <param name = "flag">The "on/off" state to set the option</param>
-		 * <param name = "isLocked">The "locked/unlocked" state to set the option</param>
-		 */
-		public new void SetOptionState (int id, bool flag, bool isLocked)
-		{
-		foreach (AC.ButtonDialog option in options)
-			{
-				if (option.ID == id)
-				{
-					if (!option.isLocked)
-					{
-						option.isLocked = isLocked;
-						option.isOn = flag;
-					}
-					AC.KickStarter.playerMenus.RefreshDialogueOptions ();
-					return;
-				}
-			}
-		}
-
-
-		/**
-		 * <summary>Turns all dialogue options on</summary>
-		 * <param name = "includingLocked">If True, then locked options will be unlocked and turned on as well. Otherwise, they will remain locked</param>
-		 */
-		public new void TurnAllOptionsOn (bool includingLocked)
-		{
-			foreach (AC.ButtonDialog option in options)
-			{
-				if (includingLocked || !option.isLocked)
-				{
-					option.isLocked = false;
-					option.isOn = true;
-				}
-			}
-		}
-
-
-		/**
-		 * <summary>Renames a dialogue option.</summary>
-		 * <param name = "id">The ID number of the dialogue option to rename</param>
-		 * <param name = "newLabel">The new label text to give the dialogue option<param>
-		 * <param name = "newLindID">The line ID number to give the dialogue option, as set by the Speech Manager</param>
-		 */
-		public new void RenameOption (int id, string newLabel, int newLineID)
-		{
-			foreach (AC.ButtonDialog option in options)
-			{
-				if (option.ID == id)
-				{
-					option.label = newLabel;
-					option.lineID = newLineID;
-					return;
-				}
-			}
-		}
-		
-
-		/**
-		 * <summary>Gets the number of enabled dialogue options.</summary>
-		 * <returns>The number of enabled dialogue options</summary>
-		 */
-		public new int GetCount ()
-		{
-			int numberOn = 0;
-			foreach (AC.ButtonDialog _option in options)
-			{
-				if (_option.CanShow ())
-				{
-					numberOn ++;
-				}
-			}
-			return numberOn;
-		}
-
-
-		/**
-		 * <summary>Checks if a dialogue option with a specific ID is active.</summary>
-		 * <param name="ID">The ID of the dialogue option to check for</param>
-		 * <returns>True if the specified option is active</summary>
-		 */
-		public new bool OptionWithIDIsActive (int ID)
-		{
-			AC.ButtonDialog buttonDialog = GetOptionWithID (ID);
-			if (buttonDialog == null) return false;
-			return buttonDialog.CanShow ();
-		}
-
-
-		/**
-		 * <summmary>Gets an array of ID numbers of existing ButtonDialog classes, so that a unique number can be generated.</summary>
-		 * <returns>Gets an array of ID numbers of existing ButtonDialog classes</returns>
-		 */
-		public new int[] GetIDArray ()
-		{
-			List<int> idArray = new List<int>();
-			foreach (AC.ButtonDialog option in options)
-			{
-				idArray.Add (option.ID);
-			}
-			
-			idArray.Sort ();
-			return idArray.ToArray ();
-		}
-
-
-		/** Checks if the Converations options are currently being overridden by an ActionList */
-		public new bool HasActionListOverride ()
-		{
-			return (overrideActiveList != null);
-		}
-
-		
-		/** Checks if the Converations options are currently being overridden by a specific ActionList */
-		public new bool IsOverridingActionList (AC.ActionList actionList)
-		{
-			return overrideActiveList != null && overrideActiveList.actionList == actionList;
-		}
-
-		#endregion
-
-
 		#region ProtectedFunctions
-
-		protected void RunOption(ButtonDialogExtended option)
-		{
-
-			
-			AC.ACDebug.Log($"[ConversationFromFile] RunOption(ButtonDialogExtended) called with option ID: {option?.ID}", this);
-			if (option == null)
-			{
-				AC.ACDebug.LogWarning("Null option provided", this);
-				return;
-			}
-
-			ConversationOptionData optionData = option.customData as ConversationOptionData;
-			if (optionData == null)
-			{
-				AC.ACDebug.LogWarning("Option has no custom data", this);
-				base.RunOption(option);
-				return;
-			}
-
-			// Mark the option as chosen
-			option.hasBeenChosen = true;
-
-			if(optionData.type == "question")
-			{
-				stage = ConversationStage.Response;
-				AC.ACDebug.Log("Transitioning to Response stage", this);
-				LoadResponseOptions(optionData);
-			}
-
-			// Log the current stage and option type
-			AC.ACDebug.Log($"Current stage: {stage}, Option type: {optionData.type}", this);
-
-			// Handle the option based on its type
-			switch (optionData.type)
-			{
-				case "question":
-					stage = ConversationStage.Response;
-					AC.ACDebug.Log("Transitioning to Response stage", this);
-					LoadResponseOptions(optionData);
-					break;
-
-				case "response":
-					stage = ConversationStage.Action;
-					AC.ACDebug.Log("Transitioning to Action stage", this);
-					LoadActionOptions(optionData);
-					break;
-
-				case "action":
-					ExecuteAction(optionData);
-					stage = ConversationStage.Question;
-					AC.ACDebug.Log("Returning to Question stage", this);
-					LoadConversationFromJson();
-					break;
-			}
-
-			// Refresh the menu to show new options
-			if (AC.KickStarter.playerMenus != null)
-			{
-				AC.KickStarter.playerMenus.RefreshDialogueOptions();
-			}
-		}
-		
-
-		protected new void RunDefault ()
-		{
-			AC.ACDebug.Log("[ConversationFromFile] RunDefault called", this);
-			if (AC.KickStarter.playerInput && AC.KickStarter.playerInput.IsInConversation ())
-			{
-				if (defaultOption < 0 || defaultOption >= options.Count)
-				{
-					TurnOff ();
-				}
-				else
-				{
-					RunOption (defaultOption, true);
-				}
-			}
-		}
-		
-		
-		protected new int ConvertSlotToOption (int slot, bool force = false)
-		{
-			AC.ACDebug.Log($"[ConversationFromFile] ConvertSlotToOption called with slot: {slot}, force: {force}", this);
-			int foundSlots = 0;
-			for (int j=0; j<options.Count; j++)
-			{
-				if (force || options[j].CanShow ())
-				{
-					foundSlots ++;
-					if (foundSlots == (slot+1))
-					{
-						return j;
-					}
-				}
-			}
-			return -1;
-		}
 
 
 		protected new void OnEndActionList (AC.ActionList actionList, AC.ActionListAsset actionListAsset, bool isSkipping)
 		{
 			AC.ACDebug.Log($"[ConversationFromFile] OnEndActionList called with actionList: {actionList?.name}, isSkipping: {isSkipping}", this);
-			
+
 			if (overrideActiveList == null)
 			{
 				foreach (AC.ButtonDialog buttonDialog in options)
@@ -847,94 +214,115 @@ namespace GGJ2025
 			}
 		}
 
-
-		protected new void OnEndConversation (AC.Conversation conversation)
+		private string FormatDialogueText(params string[] parts)
 		{
-			AC.ACDebug.Log($"[ConversationFromFile] OnEndConversation called with conversation: {conversation?.name}", this);
-			if (conversation == this && onFinishActiveList != null)
-			{
-				if (onFinishActiveList.actionListAsset)
-				{
-					AC.KickStarter.actionListManager.ResetSkippableData ();
-					onFinishActiveList.actionList = AC.AdvGame.RunActionListAsset (onFinishActiveList.actionListAsset, onFinishActiveList.startIndex, true);
-				}
-				else if (onFinishActiveList.actionList)
-				{
-					AC.KickStarter.actionListManager.ResetSkippableData ();
-					onFinishActiveList.actionList.Interact (onFinishActiveList.startIndex, true);
-				}
-			}
-
-			onFinishActiveList = null;
-		}
-
-
-		protected new void OnFinishLoading (int saveID)
-		{
-			AC.ACDebug.Log($"[ConversationFromFile] OnFinishLoading called with saveID: {saveID}", this);
-			onFinishActiveList = null;
-			overrideActiveList = null;
+			// Filter out null or empty strings but preserve internal spaces
+			var validParts = parts
+				.Where(p => !string.IsNullOrEmpty(p))
+				.Select(p => {
+					// Normalize internal spaces (replace multiple spaces with single space)
+					string normalized = System.Text.RegularExpressions.Regex.Replace(p.Trim(), @"\s+", " ");
+					return normalized;
+				})
+				.Where(p => !string.IsNullOrWhiteSpace(p));
+			
+			// Join with single spaces between parts
+			return string.Join(" ", validParts);
 		}
 
 		private void LoadResponseOptions(ConversationOptionData optionData)
 		{
+			options.Clear();
+
 			AC.ACDebug.Log($"[ConversationFromFile] LoadResponseOptions called with objectKey: {optionData?.objectKey}", this);
 			if (!string.IsNullOrEmpty(optionData.objectKey))
 			{
-				options.Clear();
-				var outcomes = jsonData?.responses?.outcomes?.items?.GetValueOrDefault(optionData.objectKey);
-				if (outcomes != null)
+				// Count existing options for this objectKey
+				int existingOptionsCount = options.Count(o => 
+					(o as ButtonDialogExtended)?.customData is ConversationOptionData data && 
+					data.objectKey == optionData.objectKey);
+
+				if (existingOptionsCount >= 8)
 				{
-					// Create a list to store all possible responses
-					List<(string text, string[] items)> allResponses = new List<(string text, string[] items)>();
+					AC.ACDebug.Log($"Already have {existingOptionsCount} options for {optionData.objectKey}, skipping new options", this);
+					stage = ConversationStage.Response;
+					UpdateOptionVisibility();
+					return;
+				}
+
+				// Change stage to show response
+				stage = ConversationStage.Response;
+				
+				// Get outcomes for the specific object
+				if (jsonData.responses.outcomes.items.TryGetValue(optionData.objectKey, out var outcomes) && outcomes != null)
+				{
+					List<(string outcome, string[] validItems)> allOutcomes = new List<(string, string[])>();
 					
-					// Add left responses
+					// Collect all possible outcomes
 					if (outcomes.left != null)
 					{
-						foreach (string outcome in outcomes.left)
-						{
-							allResponses.Add((outcome, outcomes.left_items));
-						}
+						allOutcomes.AddRange(outcomes.left.Select(o => (o, outcomes.left_items)));
 					}
-					
-					// Add right responses
 					if (outcomes.right != null)
 					{
-						foreach (string outcome in outcomes.right)
-						{
-							allResponses.Add((outcome, outcomes.right_items));
-						}
+						allOutcomes.AddRange(outcomes.right.Select(o => (o, outcomes.right_items)));
 					}
 
-					// Randomly select up to 3 responses
-					int numOptionsToShow = Mathf.Min(3, allResponses.Count);
-					for (int i = 0; i < numOptionsToShow; i++)
+					// Randomly select outcomes up to the remaining slot limit
+					int slotsRemaining = 8 - existingOptionsCount;
+					int outcomesToAdd = Math.Min(slotsRemaining, allOutcomes.Count);
+					
+					// Shuffle the outcomes
+					allOutcomes = allOutcomes.OrderBy(x => UnityEngine.Random.value).ToList();
+
+					// Add the selected number of outcomes
+					for (int i = 0; i < outcomesToAdd; i++)
 					{
-						// Select a random response
-						int randomIndex = UnityEngine.Random.Range(0, allResponses.Count);
-						var (text, items) = allResponses[randomIndex];
-						
-						var responseData = new ConversationOptionData
-						{
+						var (outcome, validItems) = allOutcomes[i];
+						var buttonDialog = new ButtonDialogExtended(new int[] { 0 });
+						buttonDialog.label = FormatDialogueText(
+							GetRandomElement(jsonData.responses.acknowledgements),
+							outcome,
+							GetRandomElement(outcomes.speculations)
+						);
+						buttonDialog.customData = new ConversationOptionData { 
 							type = "response",
 							objectKey = optionData.objectKey,
-							validItems = items
+							validItems = validItems
 						};
-
-						ButtonDialogExtended responseDialog = CreateDialogOption(text, responseData);
-						if (responseDialog != null)
-						{
-							options.Add(responseDialog);
-						}
-						
-						// Remove the selected response to avoid duplicates
-						allResponses.RemoveAt(randomIndex);
+						options.Add(buttonDialog);
 					}
 				}
 				
-				// Log the number of options created
-				AC.ACDebug.Log($"Created {options.Count} response options for object {optionData.objectKey}", this);
+				UpdateOptionVisibility();
 			}
+		}
+
+		private void ExecuteSimpleConversation(ConversationOptionData optionData)
+		{
+			AC.ACDebug.Log($"[ConversationFromFile] ExecuteSimpleConversation called with objectKey: {optionData?.objectKey}", this);
+			AC.ACDebug.Log($"[ConversationFromFile] ExecuteSimpleConversation called with answer: {optionData?.answer}", this);
+
+			// Process answer text for inventory items
+			ProcessTextForInventoryItems(optionData?.answer);
+
+			// Remove all existing options except the clicked one
+			var optionsToRemove = options.Where(o => o is ButtonDialogExtended).ToList();
+			foreach (var option in optionsToRemove)
+			{
+				options.Remove(option);
+			}
+
+			// Create a response dialog option
+			var buttonDialog = new ButtonDialogExtended(new int[] { 0 });
+			buttonDialog.label = optionData.answer;
+			buttonDialog.customData = new ConversationOptionData { type = "response" };
+			options.Add(buttonDialog);
+
+			// Change stage to show response
+			stage = ConversationStage.Response;
+			
+			UpdateOptionVisibility();
 		}
 
 		private void LoadActionOptions(ConversationOptionData optionData)
@@ -942,7 +330,8 @@ namespace GGJ2025
 			AC.ACDebug.Log($"[ConversationFromFile] LoadActionOptions called with validItems: {string.Join(", ", optionData?.validItems ?? new string[0])}", this);
 			if (optionData.validItems != null && optionData.validItems.Length > 0)
 			{
-				options.Clear();
+				UpdateOptionVisibility();
+				
 				foreach (var category in new[] 
 				{ 
 					new { dict = jsonData.actions.objects, name = "objects" },
@@ -1006,7 +395,7 @@ namespace GGJ2025
 		 */
 		public new bool ConvertLocalVariableToGlobal (int oldLocalID, int newGlobalID)
 		{
-			bool wasAmened = false;
+			bool wasAmended = false;
 
 			if (options != null)
 			{
@@ -1016,12 +405,12 @@ namespace GGJ2025
 					if (newLabel != option.label)
 					{
 						option.label = newLabel;
-						wasAmened = true;
+						wasAmended = true;
 					}
 				}
 			}
 
-			return wasAmened;
+			return wasAmended;
 		}
 
 
@@ -1243,9 +632,13 @@ namespace GGJ2025
 
 		protected virtual void LoadConversationFromJson()
 		{
+			options.Clear();
+
 			AC.ACDebug.Log("[ConversationFromFile] LoadConversationFromJson called", this);
 			try
 			{
+				UpdateOptionVisibility();
+				
 				if (jsonFile == null)
 				{
 					AC.ACDebug.LogWarning("No JSON file assigned", this);
@@ -1262,12 +655,12 @@ namespace GGJ2025
 				AC.ACDebug.Log($"Loading JSON content: {jsonString}", this);
 				
 				// Initialize jsonData and its properties
-				jsonData = new ConversationData
+				jsonData = new JsonConversationData
 				{
+					conversations = new ConversationEntry[0],
 					responses = new ResponseData
 					{
 						acknowledgements = new string[0],
-						speculations = new string[0],
 						outcomes = new OutcomeDictionary()
 					},
 					actions = new ActionData
@@ -1277,7 +670,10 @@ namespace GGJ2025
 						locations = new Dictionary<string, ActionItemData>()
 					}
 				};
-				
+
+				var conversations = JsonUtility.FromJson<JsonConversationData>(jsonString);
+				jsonData.conversations = conversations.conversations;
+
 				// Parse the objects dictionary first - remove only newlines and carriage returns, keep spaces
 				var objectDict = ObjectDictionary.CreateFromJSON(jsonString);
 				if (objectDict == null || objectDict.items == null || objectDict.items.Count == 0)
@@ -1295,12 +691,11 @@ namespace GGJ2025
 				}
 				else
 				{
-					jsonData.question_structure = "[observation] Is it because [cause] [mystical_question]";
+					jsonData.question_structure = "[observation] Is it because [cause]";
 				}
 				
 				// Parse responses
 				jsonData.responses.acknowledgements = ParseStringArray(jsonString, "acknowledgements");
-				jsonData.responses.speculations = ParseStringArray(jsonString, "speculations");
 				jsonData.responses.outcomes = OutcomeDictionary.CreateFromJSON(jsonString);
 				
 				// Parse actions section
@@ -1308,7 +703,7 @@ namespace GGJ2025
 				if (actionsStart != -1)
 				{
 					actionsStart = jsonString.IndexOf("{", actionsStart);
-					int actionsEnd = FindMatchingBrace(jsonString, actionsStart);
+					int actionsEnd = JsonParser.FindMatchingBrace(jsonString, actionsStart);
 					if (actionsEnd != -1)
 					{
 						string actionsJson = jsonString.Substring(actionsStart, actionsEnd - actionsStart + 1);
@@ -1316,69 +711,90 @@ namespace GGJ2025
 					}
 				}
 
-				options.Clear();
-				
-				// Generate all possible question combinations
-				List<(string objectKey, string questionText)> allCombinations = new List<(string, string)>();
-				
-				foreach (var kvp in objectDict.items)
+				// Modify the numOptionToShow calculation
+				int numOptionsToShow = 8; // Always show 3 of each option, regardless of combinations count
+
+				// Add simple conversation options
+				for (int i = 0; i < numOptionsToShow; i++)
 				{
-					string objectKey = kvp.Key;
-					ObjectData objectData = kvp.Value;
-					
-					if (objectData?.observations == null || objectData.causes == null || objectData.mystical_questions == null)
+					// Get available indices (ones we haven't used yet)
+					var availableIndices = Enumerable.Range(0, jsonData.conversations.Length)
+						.Where(idx => !ConversationTracker.IsConversationUsed(idx))
+						.ToList();
+
+					// If we've used all conversations, reset the tracking
+					if (availableIndices.Count == 0)
 					{
-						AC.ACDebug.LogWarning($"Skipping invalid object data for key: {objectKey}", this);
-						continue;
+						ConversationTracker.ResetTracking();
+						availableIndices = Enumerable.Range(0, jsonData.conversations.Length).ToList();
 					}
 
-					foreach (string observation in objectData.observations)
+					// Pick a random index from available ones
+					int randomIndex = UnityEngine.Random.Range(0, availableIndices.Count);
+					int selectedIndex = availableIndices[randomIndex];
+					
+					var selectedSimpleConversation = jsonData.conversations[selectedIndex];
+					ConversationTracker.MarkConversationUsed(selectedIndex);
+					
+					var simpleOptionData = new ConversationOptionData
 					{
-						foreach (string cause in objectData.causes)
-						{
-							foreach (string mysticalQuestion in objectData.mystical_questions)
-							{
-								if (string.IsNullOrEmpty(observation) || string.IsNullOrEmpty(cause) || string.IsNullOrEmpty(mysticalQuestion))
-								{
-									continue;
-								}
+						type = "simple",
+						answer = selectedSimpleConversation.answer
+					};
 
-								string questionText = jsonData.question_structure
-									.Replace("[observation]", observation.Trim())
-									.Replace("[cause]", cause.Trim())
-									.Replace("[mystical_question]", mysticalQuestion.Trim())
-									.Replace("  ", " ") // Remove any double spaces
-									.Trim(); // Remove leading/trailing spaces
-								
-								allCombinations.Add((objectKey, questionText));
-							}
+					ButtonDialogExtended simpleDialog = CreateDialogOption(
+						selectedSimpleConversation.question, 
+						simpleOptionData
+					);
+					options.Add(simpleDialog);
+
+					// Add a complex question option - pick a random object from the dictionary
+					if (jsonData.responses.outcomes.items != null && jsonData.responses.outcomes.items.Count > 0)
+					{
+						var objectKeys = jsonData.responses.outcomes.items.Keys.ToList();
+						string randomObjectKey = objectKeys[UnityEngine.Random.Range(0, objectKeys.Count)];
+						
+						var optionData = new ConversationOptionData
+						{
+							type = "question",
+							objectKey = randomObjectKey
+						};
+
+						// get the causes from the outcomes dictionary
+		
+
+						// get random cause
+						var randomCause = GetRandomElement(objectDict.items[randomObjectKey].causes);
+						var randomObservation = GetRandomElement(objectDict.items[randomObjectKey].observations);
+						string questionText = jsonData.question_structure
+							.Replace("[observation]", randomObservation)
+							.Replace("[cause]", randomCause);
+
+						ButtonDialogExtended questionDialog = CreateDialogOption(
+							questionText, 
+							optionData
+						);
+						if (questionDialog != null)
+						{
+							options.Add(questionDialog);
 						}
 					}
 				}
 
-				// Randomly select combinations and create dialog options
-				options.Clear();
-				int numOptionsToShow = Math.Min(3, allCombinations.Count);
-				
-				for (int i = 0; i < numOptionsToShow; i++)
+				// Add the leave conversation option as the fifth item
+				var leaveOptionData = new ConversationOptionData
 				{
-					int randomIndex = UnityEngine.Random.Range(0, allCombinations.Count);
-					var selectedCombination = allCombinations[randomIndex];
-					
-					var optionData = new ConversationOptionData
-					{
-						type = "question",
-						objectKey = selectedCombination.objectKey
-					};
-					
-					ButtonDialogExtended questionDialog = CreateDialogOption(selectedCombination.questionText, optionData);
-					if (questionDialog != null)
-					{
-						options.Add(questionDialog);
-					}
-					
-					allCombinations.RemoveAt(randomIndex);
-				}
+					type = "leave",
+					answer = "Goodbye."
+				};
+
+				ButtonDialogExtended leaveDialog = CreateDialogExitOption(
+					"I should go...", 
+					leaveOptionData
+				);
+				leaveDialog.isOn = true;  // Always visible during questions
+				leaveDialog.hasBeenUsed = false;
+				options.Add(leaveDialog);
 			}
 			catch (System.Exception e)
 			{
@@ -1409,9 +825,47 @@ namespace GGJ2025
 			}
 		}
 
+		private void ProcessTextForInventoryItems(string text)
+		{
+			if (string.IsNullOrEmpty(text)) return;
+
+			// Find all matches of text within <i> tags
+			var matches = System.Text.RegularExpressions.Regex.Matches(text, @"<i>(.*?)</i>");
+			
+			foreach (System.Text.RegularExpressions.Match match in matches)
+			{
+				string itemName = match.Groups[1].Value.Trim();
+				if (!string.IsNullOrEmpty(itemName))
+				{
+					// Check if item already exists
+					AC.InvItem existingItem = AC.KickStarter.inventoryManager.GetItem(itemName);
+					if (existingItem == null)
+					{
+						// Create new inventory item with a unique ID
+						int newItemId = AC.KickStarter.inventoryManager.items.Count > 0 
+							? AC.KickStarter.inventoryManager.items.Max(i => i.id) + 1 
+							: 0;
+						
+						AC.InvItem newItem = new AC.InvItem(newItemId);
+						newItem.label = itemName;
+						newItem.altLabel = itemName; // Alternative display name
+						newItem.canCarryMultiple = false;
+						
+						// Add to inventory manager
+						AC.KickStarter.inventoryManager.items.Add(newItem);
+						AC.ACDebug.Log($"Created new inventory item: {itemName} with ID: {newItemId}", this);
+					}
+				}
+			}
+		}
+
 		private ButtonDialogExtended CreateDialogOption(string text, ConversationOptionData optionData)
 		{
 			AC.ACDebug.Log($"[ConversationFromFile] CreateDialogOption called with text: {text}, type: {optionData?.type}", this);
+			
+			// Process text for inventory items before creating dialog
+			ProcessTextForInventoryItems(text);
+			
 			lastGeneratedId++;
 			int newId = lastGeneratedId;
 			int[] newIdArray = new int[] { newId };
@@ -1430,15 +884,62 @@ namespace GGJ2025
 			dialogueOption.actions = new List<AC.Action>();
 			dialogueOption.actionListType = AC.ActionListType.PauseGameplay;
 
-			// Add a action to run this conversation again
-			dialogueOption.actions.Add(new AC.ActionComment());
-			dialogueOption.actions[0].comment = "Run this conversation again";
+			// Add a comment action
+			var commentAction = ScriptableObject.CreateInstance<AC.ActionComment>();
+			commentAction.comment = "Run this conversation again";
+			dialogueOption.actions.Add(commentAction);
 			
-			// Run this conversation 
-			var runConversationAction = new AC.ActionConversation();
+			// Run this conversation using properly instantiated ActionConversation
+			var runConversationAction = ScriptableObject.CreateInstance<AC.ActionConversation>();
 			runConversationAction.conversation = this;
 			dialogueOption.actions.Add(runConversationAction);
 
+			dialog.dialogueOption = dialogueOption;
+			dialog.customData = optionData;
+			dialog.linkToInventory = false;
+			
+			
+			return dialog;
+		}
+
+		private ButtonDialogExtended CreateDialogExitOption(string text, ConversationOptionData optionData)
+		{
+			AC.ACDebug.Log($"[ConversationFromFile] CreateDialogExitOption called with text: {text}, type: {optionData?.type}", this);
+			
+			// Check for existing exit option and remove it first
+			ButtonDialogExtended existingOption = null;
+			for (int i = options.Count - 1; i >= 0; i--)
+			{
+				if (options[i].ID == 10000)
+				{
+					existingOption = options[i] as ButtonDialogExtended;
+					options.RemoveAt(i);
+					if (existingOption?.dialogueOption != null)
+					{
+						Destroy(existingOption.dialogueOption.gameObject);
+					}
+				}
+			}
+
+			// Create new exit option
+			int newId = 10000;
+			int[] newIdArray = new int[] { newId };
+			
+			ButtonDialogExtended dialog = new ButtonDialogExtended(newIdArray);
+			dialog.ID = newId;
+			dialog.label = text;
+			dialog.isOn = true;
+			dialog.conversationAction = AC.ConversationAction.Stop;
+			dialog.newConversation = null;
+
+			// Create the DialogueOption ActionList
+			GameObject actionListObject = new GameObject($"Dialogue Exit Option: {text}");
+			actionListObject.transform.parent = transform;
+			AC.DialogueOption dialogueOption = actionListObject.AddComponent<AC.DialogueOption>();
+			
+			// Set up the actions
+			dialogueOption.actions = new List<AC.Action>();
+			dialogueOption.actionListType = AC.ActionListType.PauseGameplay;
 
 			dialog.dialogueOption = dialogueOption;
 			dialog.customData = optionData;
@@ -1450,10 +951,13 @@ namespace GGJ2025
 		private void AddResponseOption(string outcome, string[] validItems, string objectKey)
 		{
 			AC.ACDebug.Log($"[ConversationFromFile] AddResponseOption called with outcome: {outcome}, objectKey: {objectKey}", this);
-			string acknowledgement = GetRandomElement(jsonData.responses.acknowledgements);
-			string speculation = GetRandomElement(jsonData.responses.speculations);
+			string acknowledgement = GetRandomElement(jsonData.responses.acknowledgements)?.Trim() ?? "";
 			
-			string responseText = $"Ah, {acknowledgement} {outcome} {speculation}";
+			// Get speculations from the outcomes data using the objectKey
+			string[] speculations = jsonData?.responses?.outcomes?.items?.GetValueOrDefault(objectKey)?.speculations ?? Array.Empty<string>();
+			string speculation = GetRandomElement(speculations)?.Trim() ?? "";
+			
+			string responseText = FormatDialogueText(acknowledgement, outcome, speculation);
 			
 			var optionData = new ConversationOptionData
 			{
@@ -1469,9 +973,8 @@ namespace GGJ2025
 		private AC.Action CreateCustomAction(ConversationOptionData optionData)
 		{
 			AC.ACDebug.Log($"[ConversationFromFile] CreateCustomAction called with objectKey: {optionData?.objectKey}", this);
-			// Here you would create a custom Action to handle the specific game logic
-			// For now, we'll just create a dummy action that logs the selection
-			var customAction = new AC.ActionComment();
+			// Create the action using ScriptableObject.CreateInstance instead of new
+			var customAction = ScriptableObject.CreateInstance<AC.ActionComment>();
 			customAction.comment = $"Selected action for {optionData.objectKey}";
 			return customAction;
 		}
@@ -1482,200 +985,72 @@ namespace GGJ2025
 			return array[UnityEngine.Random.Range(0, array.Length)];
 		}
 
-		protected static int FindMatchingBrace(string text, int openBracePos)
+
+		protected new void OnEndConversation(AC.Conversation conversation)
 		{
-			int braceCount = 1;
-			for (int i = openBracePos + 1; i < text.Length; i++)
+			AC.ACDebug.Log($"[ConversationFromFile] OnEndConversation called with conversation: {conversation?.name}", this);
+			if (conversation == this)
 			{
-				if (text[i] == '{') braceCount++;
-				else if (text[i] == '}')
+				stage = ConversationStage.Question;
+				if (loadFromJson && jsonFile != null)
 				{
-					braceCount--;
-					if (braceCount == 0) return i;
-				}
-			}
-			return -1;
-		}
-
-		[System.Serializable]
-		private class ConversationOptionData
-		{
-			public string type;
-			public string objectKey;
-			public string[] validItems;
-		}
-
-		[System.Serializable]
-		private class ConversationData
-		{
-			public string question_structure;
-			public ResponseData responses;
-			public ActionData actions;
-		}
-
-		[System.Serializable]
-		private class ResponseData
-		{
-			public string[] acknowledgements;
-			public OutcomeDictionary outcomes;
-			public string[] speculations;
-		}
-
-		[System.Serializable]
-		private class OutcomeDictionary
-		{
-			public Dictionary<string, OutcomeValue> items = new Dictionary<string, OutcomeValue>();
-
-			public static OutcomeDictionary CreateFromJSON(string inputJson)
-			{
-				try
-				{
-					var wrapper = new OutcomeDictionary();
-					
-					string cleanJson = inputJson.Replace("\n", "").Replace("\r", "").Replace(" ", "");
-					
-					int outcomesStart = cleanJson.IndexOf("\"outcomes\":");
-					if (outcomesStart == -1) return wrapper;
-					
-					outcomesStart = cleanJson.IndexOf("{", outcomesStart);
-					if (outcomesStart == -1) return wrapper;
-					
-					int outcomesEnd = FindMatchingBrace(cleanJson, outcomesStart);
-					if (outcomesEnd == -1) return wrapper;
-					
-					string outcomesJson = cleanJson.Substring(outcomesStart, outcomesEnd - outcomesStart + 1);
-					
-					int currentPos = 1;
-					while (currentPos < outcomesJson.Length)
+					// Check if we need to reset the conversation tracking
+					if (ConversationTracker.HasUsedAllConversations)
 					{
-						int keyStart = outcomesJson.IndexOf("\"", currentPos);
-						if (keyStart == -1) break;
-						
-						int keyEnd = outcomesJson.IndexOf("\"", keyStart + 1);
-						if (keyEnd == -1) break;
-						
-						string key = outcomesJson.Substring(keyStart + 1, keyEnd - keyStart - 1);
-						
-						int valueStart = outcomesJson.IndexOf("{", keyEnd);
-						if (valueStart == -1) break;
-						
-						int valueEnd = FindMatchingBrace(outcomesJson, valueStart);
-						if (valueEnd == -1) break;
-						
-						string valueJson = outcomesJson.Substring(valueStart, valueEnd - valueStart + 1);
-						
-						var outcome = JsonUtility.FromJson<OutcomeValue>(valueJson);
-						if (outcome != null)
-						{
-							wrapper.items.Add(key, outcome);
-						}
-						
-						currentPos = valueEnd + 1;
+						ConversationTracker.ResetTracking();
 					}
 					
-					return wrapper;
-				}
-				catch (System.Exception e)
-				{
-					AC.ACDebug.LogWarning($"Error parsing outcomes: {e.Message}");
-					return new OutcomeDictionary();
+					LoadConversationFromJson();
 				}
 			}
 		}
 
-		[System.Serializable]
-		private class ObjectData
+	private void OnFinishLoading()
 		{
-			public string[] observations;
-			public string[] causes;
-			public string[] mystical_questions;
-			public string[] actions;
+			AC.ACDebug.Log("[ConversationFromFile] OnFinishLoading called", this);
+			if (stage == ConversationStage.Question && loadFromJson && jsonFile != null)
+			{	
+				LoadConversationFromJson();
+			}
 		}
 
-		[System.Serializable]
-		private class ActionData
+		private void UpdateOptionVisibility()
 		{
-			public Dictionary<string, ActionItemData> objects;
-			public Dictionary<string, ActionItemData> npcs;
-			public Dictionary<string, ActionItemData> locations;
-		}
+			// Log current stage and options count
+			AC.ACDebug.Log($"[ConversationFromFile] Updating visibility for {options.Count} options in stage {stage}", this);
 
-		[System.Serializable]
-		private class ActionItemData
-		{
-			public string name;
-			public string[] actions;
-			public string[] valid_results;
-		}
-
-		[System.Serializable]
-		private class OutcomeValue
-		{
-			public string[] left;
-			public string[] left_items;
-			public string[] right;
-			public string[] right_items;
-		}
-
-		[System.Serializable]
-		private class ObjectDictionary
-		{
-			public Dictionary<string, ObjectData> items = new Dictionary<string, ObjectData>();
-
-			public static ObjectDictionary CreateFromJSON(string inputJson)
+			foreach (var option in options)
 			{
-				try
+				if (option is ButtonDialogExtended extendedOption)
 				{
-					var wrapper = new ObjectDictionary();
+					var optionData = extendedOption.customData as ConversationOptionData;
 					
-					// Only remove newlines and carriage returns, preserve spaces
-					string cleanJson = inputJson.Replace("\n", "").Replace("\r", "");
-					
-					int objectsStart = cleanJson.IndexOf("\"objects\":");
-					if (objectsStart == -1) return wrapper;
-					
-					objectsStart = cleanJson.IndexOf("{", objectsStart);
-					if (objectsStart == -1) return wrapper;
-					
-					int objectsEnd = FindMatchingBrace(cleanJson, objectsStart);
-					if (objectsEnd == -1) return wrapper;
-					
-					string objectsJson = cleanJson.Substring(objectsStart, objectsEnd - objectsStart + 1);
-					
-					int currentPos = 1;
-					while (currentPos < objectsJson.Length)
+					// Default to hidden
+					extendedOption.isOn = false;
+
+					// Skip if already used
+					if (extendedOption.hasBeenUsed)
 					{
-						int keyStart = objectsJson.IndexOf("\"", currentPos);
-						if (keyStart == -1) break;
-						
-						int keyEnd = objectsJson.IndexOf("\"", keyStart + 1);
-						if (keyEnd == -1) break;
-						
-						string key = objectsJson.Substring(keyStart + 1, keyEnd - keyStart - 1);
-						
-						int valueStart = objectsJson.IndexOf("{", keyEnd);
-						if (valueStart == -1) break;
-						
-						int valueEnd = FindMatchingBrace(objectsJson, valueStart);
-						if (valueEnd == -1) break;
-						
-						string valueJson = objectsJson.Substring(valueStart, valueEnd - valueStart + 1);
-						
-						var objectData = JsonUtility.FromJson<ObjectData>(valueJson);
-						if (objectData != null)
-						{
-							wrapper.items.Add(key, objectData);
-						}
-						
-						currentPos = valueEnd + 1;
+						AC.ACDebug.Log($"Skipping used option: {option.label}", this);
+						continue;
 					}
-					
-					return wrapper;
-				}
-				catch (System.Exception e)
-				{
-					AC.ACDebug.LogWarning($"Error parsing objects: {e.Message}");
-					return new ObjectDictionary();
+
+					// Check if option matches current stage
+					bool isMatchingStage = stage switch
+					{
+						ConversationStage.Question => optionData?.type == "question" || optionData?.type == "simple" || optionData?.type == "leave",
+						ConversationStage.Response => optionData?.type == "response",
+						ConversationStage.Action => optionData?.type == "action",
+						ConversationStage.Simple_Answer => optionData?.type == "simple",
+						_ => false
+					};
+
+					// Only show if matches stage and hasn't been used
+					extendedOption.isOn = isMatchingStage;
+
+					// Log visibility decision
+					AC.ACDebug.Log($"Option '{option.label}' visibility set to {extendedOption.isOn} " +
+								  $"(type: {optionData?.type}, stage: {stage}, used: {extendedOption.hasBeenUsed})", this);
 				}
 			}
 		}

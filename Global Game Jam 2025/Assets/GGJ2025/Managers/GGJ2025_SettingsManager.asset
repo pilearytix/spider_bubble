@@ -23,7 +23,7 @@ MonoBehaviour:
   useProfiles: 1
   maxSaves: 5
   orderSavesByUpdateTime: 1
-  reloadSceneWhenLoading: 0
+  reloadSceneWhenLoading: 1
   saveWithThreading: 0
   saveCompression: 0
   saveAssetReferencesWithAddressables: 0
@@ -37,15 +37,15 @@ MonoBehaviour:
   referenceScenesInSave: 0
   useInvariantCulture: 1
   sceneAttributes: []
-  actionListOnStart: {fileID: 0}
+  actionListOnStart: {fileID: 11400000, guid: d2426ce05bae5ca4bb4dcec6b3e1b55a, type: 2}
   blackOutWhenSkipping: 0
   events:
-  - rid: 4952515347633406174
+  - rid: 6960193976633655366
   savePlayerReferencesWithAddressables: 0
   playerSwitching: 1
   legacyPlayer: {fileID: 0}
   playerPrefab:
-    playerOb: {fileID: 5123638515458636495, guid: e8a30569858c042b284b715139eda414, type: 3}
+    playerOb: {fileID: 5123638515458636495, guid: cfbf8f16de239da459d3390ca4b445a5, type: 3}
     ID: 0
     isDefault: 0
     startingSceneIndex: 0
@@ -55,10 +55,10 @@ MonoBehaviour:
     startingPlayerStartID: 0
   players: []
   movementMethod: 1
-  inputMethod: 1
+  inputMethod: 0
   simulatedCursorMoveSpeed: 4
   interactionMethod: 0
-  selectInteractions: 1
+  selectInteractions: 0
   autoHideInteractionIcons: 1
   cancelInteractions: 1
   seeInteractions: 1
@@ -68,28 +68,28 @@ MonoBehaviour:
   scaleCursorSpeedWithScreen: 1
   autoCycleWhenInteract: 0
   showHoverInteractionInHotspotLabel: 0
-  allowDefaultinteractions: 0
+  allowDefaultinteractions: 1
   alwaysCloseInteractionMenus: 1
   whenReselectHotspot: 0
-  lockCursorOnStart: 1
-  hideLockedCursor: 1
+  lockCursorOnStart: 0
+  hideLockedCursor: 0
   disableFreeAimWhenDragging: 0
   disableFreeAimWhenDraggingPickUp: 0
   runConversationsWithKeys: 1
-  clickUpInteractions: 0
+  clickUpInteractions: 1
   clickUpHotspots: 0
   defaultMouseClicks: 1
   allowGameplayDuringConversations: 0
   walkToHotspotMarkers: 1
-  dragThreshold: 0
+  dragThreshold: 0.0011
   maxInventorySlots: 0
   shareInventory: 0
-  inventoryDragDrop: 0
+  inventoryDragDrop: 1
   dragDropThreshold: 0
   allowInventoryInteractionsDuringConversations: 0
   inventoryDropLook: 0
   inventoryDropLookNoDrag: 0
-  inventoryInteractions: 1
+  inventoryInteractions: 0
   inventoryDisableLeft: 1
   leftClickDeselect: 1
   allowDefaultInventoryInteractions: 0
@@ -100,17 +100,17 @@ MonoBehaviour:
   inventoryActiveEffect: 1
   inventoryPulseSpeed: 1
   activeWhenUnhandled: 1
-  canReorderItems: 0
-  selectInventoryDisplay: 0
+  canReorderItems: 1
+  selectInventoryDisplay: 2
   rightClickInventory: 0
   reverseInventoryCombinations: 0
   canMoveWhenActive: 1
-  selectInvWithUnhandled: 0
+  selectInvWithUnhandled: 1
   selectInvWithIconID: 0
   giveInvWithUnhandled: 0
   giveInvWithIconID: 0
-  autoDisableUnhandledHotspots: 0
-  autoToggleGiveMode: 1
+  autoDisableUnhandledHotspots: 1
+  autoToggleGiveMode: 0
   clickPrefab: {fileID: 0}
   showClickPrefabWithStraightToCursorHeld: 0
   clickMarkerPosition: 0
@@ -168,16 +168,16 @@ MonoBehaviour:
   touchUpWhenPaused: 0
   touchUpInteractScene: 0
   forceAspectRatio: 0
-  aspectRatioEnforcement: 0
-  wantedAspectRatio: 1.5
+  aspectRatioEnforcement: 2
+  wantedAspectRatio: 2
   maxAspectRatio: 2.39
-  renderBorderCamera: 1
+  renderBorderCamera: 0
   landscapeModeOnly: 1
   cameraPerspective: 2
   cacheCameraMain: 0
   linearColorTextures: 0
   movingTurning: 3
-  hotspotDetection: 1
+  hotspotDetection: 0
   closeInteractionMenusIfPlayerLeavesVicinity: 0
   placeDistantHotspotsOnSeparateLayer: 1
   cursorMustBeOverNearestHotspot: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
     alwaysAnimate: 0
   highlightMaterialPropertyOverride: 
   hotspotIconSize: 0.04
-  playerFacesHotspots: 0
+  playerFacesHotspots: 1
   onlyFaceHotspotOnSelect: 0
   scaleHighlightWithMouseProximity: 0
   highlightProximityFactor: 4
@@ -218,7 +218,7 @@ MonoBehaviour:
   navMeshLayer: NavMesh
   backgroundImageLayer: BackgroundImage
   deactivatedLayer: Ignore Raycast
-  useLoadingScreen: 0
+  useLoadingScreen: 1
   manualSceneActivation: 0
   loadingSceneIs: 0
   loadScenesFromAddressable: 0
@@ -230,12 +230,17 @@ MonoBehaviour:
   spawnPersistentEnginePrefab: 1
   autoCallUnloadUnusedAssets: 1
   playMusicWhilePaused: 0
-  playAmbienceWhilePaused: 0
+  playAmbienceWhilePaused: 1
   musicStorages: []
-  ambienceStorages: []
+  ambienceStorages:
+  - ID: 0
+    label: 
+    audioClip: {fileID: 8300000, guid: a9e9bfc43206f094bb31de5f81c6008d, type: 3}
+    relativeVolume: 1
+    overrideMixerGroup: {fileID: 0}
   loadAmbienceFadeTime: 0
   crossfadeAmbienceWhenLoading: 0
-  restartAmbienceTrackWhenLoading: 0
+  restartAmbienceTrackWhenLoading: 1
   loadMusicFadeTime: 0
   crossfadeMusicWhenLoading: 0
   restartMusicTrackWhenLoading: 0
@@ -262,11 +267,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 4952515347633406174
+    - rid: 6960193976633655366
       type: {class: EventBeginGame, ns: AC, asm: AC}
       data:
-        label: Apply graphic options
+        label: 
         id: 0
         cutscene: {fileID: 0}
-        actionListAsset: {fileID: 11400000, guid: 51bf211d9debf48c491b053ee0b6c436, type: 2}
+        actionListAsset: {fileID: 11400000, guid: 0d51ed5dc85835d4da50ef3fd9223c4c, type: 2}
         parameterIDs: 

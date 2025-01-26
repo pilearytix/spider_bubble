@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2581109077607556516}
   - component: {fileID: 2933059905647303268}
   - component: {fileID: 1878859336676469895}
-  - component: {fileID: 3095785556645699445}
+  - component: {fileID: -3628387380059347232}
   m_Layer: 5
   m_Name: txtGameName
   m_TagString: Untagged
@@ -61,7 +61,7 @@ MonoBehaviour:
   constantID: 66278
   retainInPrefab: 1
   autoManual: 0
---- !u!114 &3095785556645699445
+--- !u!114 &-3628387380059347232
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -299,7 +299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5083274995972794851}
   - component: {fileID: 5083274995972578083}
-  - component: {fileID: -3674824167414790531}
+  - component: {fileID: -4333751563047425587}
   m_Layer: 5
   m_Name: txtOptions
   m_TagString: Untagged
@@ -334,7 +334,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5083274995992437571}
   m_CullTransparentMesh: 0
---- !u!114 &-3674824167414790531
+--- !u!114 &-4333751563047425587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -435,7 +435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5083274995972794853}
   - component: {fileID: 5083274995972578085}
-  - component: {fileID: -2998282864784897777}
+  - component: {fileID: 5626820016620192060}
   m_Layer: 5
   m_Name: txtQuit
   m_TagString: Untagged
@@ -470,7 +470,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5083274995992437573}
   m_CullTransparentMesh: 0
---- !u!114 &-2998282864784897777
+--- !u!114 &5626820016620192060
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -847,7 +847,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5083274995972794859}
   - component: {fileID: 5083274995972578091}
-  - component: {fileID: 6386572617118253135}
+  - component: {fileID: 224862389997332045}
   m_Layer: 5
   m_Name: txtContinue
   m_TagString: Untagged
@@ -882,7 +882,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5083274995992437579}
   m_CullTransparentMesh: 0
---- !u!114 &6386572617118253135
+--- !u!114 &224862389997332045
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -983,7 +983,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5083274995972794865}
   - component: {fileID: 5083274995972578103}
-  - component: {fileID: -1750947642035985679}
+  - component: {fileID: -6084494924069125084}
   m_Layer: 5
   m_Name: txtNewGame
   m_TagString: Untagged
@@ -1018,7 +1018,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5083274995992437585}
   m_CullTransparentMesh: 0
---- !u!114 &-1750947642035985679
+--- !u!114 &-6084494924069125084
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1390,7 +1390,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5083274995972945189}
   - component: {fileID: 5083274995972744859}
-  - component: {fileID: 8841203427221510179}
+  - component: {fileID: -3112616935240561022}
   m_Layer: 5
   m_Name: txtLoad
   m_TagString: Untagged
@@ -1425,7 +1425,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5083274995992522373}
   m_CullTransparentMesh: 0
---- !u!114 &8841203427221510179
+--- !u!114 &-3112616935240561022
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
