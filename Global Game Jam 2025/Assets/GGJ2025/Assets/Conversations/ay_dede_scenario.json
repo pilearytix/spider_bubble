@@ -2,35 +2,35 @@
     "conversations": [
         {
             "question": "Why are you here?",
-            "answer": "So I can finally wash this moon dust from my <i>crevices</i>."
+            "answer": "So I can finally wash this moon dust from my <u>crevices</u>."
         },
         {
             "question": "What is this place?",
-            "answer": "We wash, we live, we wash. The <i>cycle</i> begins anew, never-ending."
+            "answer": "We wash, we live, we wash. The <u>cycle</u> begins anew, never-ending."
         },
         {
             "question": "Do I know you?",
-            "answer": "Perhaps you have seen me before? I've certainly seen you. But then again, I see everyone up there on my <i>perch</i>."
+            "answer": "Perhaps you have seen me before? I've certainly seen you. But then again, I see everyone up there on my <u>perch</u>."
         },
         {
             "question": "Do you know who I am?",
-            "answer": "Peer into the <i>shimmering</i> pools. Who do you see staring back, child?"
+            "answer": "Peer into the <u>shimmering</u> pools. Who do you see staring back, child?"
         },
         {
             "question": "Do you like it here?",
-            "answer": "I do, but even more so at night. So dark, so peaceful, tranquility <i>unmatched</i>. Perfect for a little nap."
+            "answer": "I do, but even more so at night. So dark, so peaceful, tranquility <u>unmatched</u>. Perfect for a little nap."
         },
         {
             "question": "What are your plans after the sauna?",
-            "answer": "Once I'm <i>done</i> here, I'm tucking into some delectable ayran, hehe."
+            "answer": "Once I'm <u>done</u> here, I'm tucking into some delectable ayran, hehe."
         },
         {
             "question": "Have I changed?",
-            "answer": "That depends: What do you mean by 'I'? And what exactly do you mean by 'changed'? One meaning can <i>move</i> to another, after all."
+            "answer": "That depends: What do you mean by 'I'? And what exactly do you mean by 'changed'? One meaning can <u>move</u> to another, after all."
         },
         {
             "question": "What can I get from this place?",
-            "answer": "The waters here will cleanse you, <i>through</i> and through."
+            "answer": "The waters here will cleanse you, <u>through</u> and through."
         }
     ],
     "objects": {

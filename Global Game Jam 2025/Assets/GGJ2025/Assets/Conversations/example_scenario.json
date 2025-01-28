@@ -2,7 +2,7 @@
     "conversations": [
         {
             "question": "How do you feel?",
-            "answer": "I'm jussssst sssso wound up, hehe <i>coiled</i> like a viper."
+            "answer": "I'm jussssst sssso wound up, hehe <u>coiled</u> like a viper."
         },
         {
             "question": "What is she saying to her snake tail?",
@@ -10,7 +10,7 @@
         },
         {
             "question": "How do you relax?",
-            "answer": "Proooo gresssssive <i>mussssssssscle</i>, relaaaa aaaa aaaxxxaAAACHOO!"
+            "answer": "Proooo gresssssive <u>mussssssssscle</u>, relaaaa aaaa aaaxxxaAAACHOO!"
         },
         {
             "question": "What is your advice to people who are stressed?",
@@ -18,11 +18,11 @@
         },
         {
             "question": "What is one regret you have?",
-            "answer": "why didn't you do yoga like your <i>mother</i> ssssaid Maran. Rebellioussssss teen turned ssssstiff queen. Letsss open up thosssse jointsssss"
+            "answer": "why didn't you do yoga like your <u>mother</u> ssssaid Maran. Rebellioussssss teen turned ssssstiff queen. Letsss open up thosssse jointsssss"
         },
         {
             "question": "Do snakes even enjoy saunas?",
-            "answer": "Ugh, all this ssssteam, I <i>feel</i> like I can't breath, wish I had more ssssweat glandsss but I just had new sssscales put in."
+            "answer": "Ugh, all this ssssteam, I <u>feel</u> like I can't breath, wish I had more ssssweat glandsss but I just had new sssscales put in."
         },
         {
             "question": "Do you like this Hammam?",
@@ -55,7 +55,7 @@
                 "of the pump deciding to take an unscheduled siesta?",
                 "of a seal eloping with its neighbouring gasket?",
                 "of the water tank going on a diet?",
-                "of air bubbles <i>hosting</i> a party in there?",
+                "of air bubbles <u>hosting</u> a party in there?",
                 "of the pipes developing a rust fashion statement?",
                 "of the filter becoming a hermit?",
                 "of the power supply playing peek-a-boo?",

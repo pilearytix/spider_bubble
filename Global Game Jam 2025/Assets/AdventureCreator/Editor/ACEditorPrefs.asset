@@ -26,6 +26,6 @@ MonoBehaviour:
   installPath: Assets/AdventureCreator
   autosaveActionListsInterval: 10
   retainExportFieldData: 1
-  allowDragDrop: 0
+  allowDragDrop: 1
   actionListAssetPath: 
   exportEncoding: 0

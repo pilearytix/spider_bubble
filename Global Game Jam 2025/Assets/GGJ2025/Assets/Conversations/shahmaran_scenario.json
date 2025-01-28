@@ -2,35 +2,35 @@
     "conversations": [
         {
             "question": "How do you feel?",
-            "answer": "I'm jussssst sssso wound <i>up</i>, hehe coiled like a viper."
+            "answer": "I'm jussssst sssso wound <u>up</u>, hehe coiled like a viper."
         },
         {
             "question": "Why are you here?",
-            "answer": "I've come here to relaxxxx. Can you <i>pleassse</i> lie sssstill (addressing tail)"
+            "answer": "I've come here to relaxxxx. Can you <u>pleassse</u> lie sssstill (addressing tail)"
         },
         {
             "question": "What are you saying to your snake tail?",
-            "answer": "Now stop your hissing sssssilly snake. Well, I suppose you are me technically, ssssame silly ssssnake."
+            "answer": "Now stop your hissing sssssilly snake. Well, I suppose you are me technically, ssssame <u>silly</u> ssssnake."
         },
         {
             "question": "How do you relax?",
-            "answer": "Proooo gresssssive mussssssssscle, relaaaa aaaa aaaxxxaaaAAAAAAH I stepped on a steam vent, those are so <i>hot</i>!!!"
+            "answer": "Proooo gresssssive mussssssssscle, relaaaa aaaa aaaxxxaaaAAAAAAH I stepped on a steam vent, those are so <u>hot</u>!!!"
         },
         {
             "question": "What is your advice to people who are stressed?",
-            "answer": "Breathhh innnnn, (rattles) and breath outtttt (rattles). Breath I... I swear if you rattle again i'll <i>lose</i> my rag!"
+            "answer": "Breathhh innnnn, (rattles) and breath outtttt (rattles). Breath I... I swear if you rattle again i'll <u>lose</u> my rag!"
         },
         {
             "question": "What is one regret you have?",
-            "answer": "Not listening to my mother… 'Why don't you do yoga' She would say. Rebellioussssss teen turned ssssstiff queen. Letsss <i>unlock</i> thosssse jointsssss. Hopefully, it's not too late for me to limber up."
+            "answer": "Not listening to my mother… 'Why don't you do yoga' She would say. Rebellioussssss teen turned ssssstiff queen. Letsss <u>unlock</u> thosssse jointsssss. Hopefully, it's not too late for me to limber up."
         },
         {
             "question": "Do snakes even enjoy saunas?",
-            "answer": "Ugh, all this ssssteam, I feel like I can't breath, <i>wish</i> I had more ssssweat glandsss but I just had new sssscales put in."
+            "answer": "Ugh, all this ssssteam, I feel like I can't breath, <u>wish</u> I had more ssssweat glandsss but I just had new sssscales put in."
         },
         {
             "question": "Do you like this Hammam?",
-            "answer": "Tasting the air's useless here, all I taste is lavender <i>oil</i>, limessssscale and 100 year old mould. Not to mention everyone elses ssssssodding sweat."
+            "answer": "Tasting the air's useless here, all I taste is lavender <u>oil</u>, limessssscale and 100 year old mould. Not to mention everyone elses ssssssodding sweat."
         }
     ],
     "objects": {

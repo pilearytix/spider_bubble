@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OnStartGame
   m_EditorClassIdentifier: 
   actions:
-  - {fileID: 1394710610628115245}
+  - {fileID: 8765113427790681955}
   isSkippable: 1
   actionListType: 0
   unfreezePauseMenus: 1
@@ -25,7 +25,7 @@ MonoBehaviour:
   tagID: 0
   groups: []
   backupData: []
---- !u!114 &1394710610628115245
+--- !u!114 &8765113427790681955
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -34,7 +34,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d11677f69f745f88dbe9922511d53f, type: 3}
+  m_Script: {fileID: 11500000, guid: 62039dffc3e3f4364ae507b3a6225ad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
@@ -61,21 +61,19 @@ MonoBehaviour:
     x: 14
     y: 14
     width: 300
-    height: 268.41
+    height: 233
   overrideColor: {r: 1, g: 1, b: 1, a: 1}
   showOutputSockets: 1
   parentActionListInEditor: {fileID: 0}
   groupID: 0
-  chooseSceneBy: 0
-  sceneNumber: 1
-  sceneNumberParameterID: -1
-  sceneName: 
-  sceneNameParameterID: -1
-  assignScreenOverlay: 0
-  onlyPreload: 0
-  bypassLoadingScreen: 1
-  relativePosition: 0
-  relativeMarker: {fileID: 0}
-  relativeMarkerID: 0
-  relativeMarkerParameterID: -1
-  forceReload: 1
+  trackID: 0
+  trackIDParameterID: -1
+  fadeTime: 0
+  fadeTimeParameterID: -1
+  loop: 1
+  isQueued: 0
+  resumeFromStart: 1
+  resumeIfPlayedBefore: 0
+  willWaitComplete: 0
+  musicAction: 0
+  loopingOverlapTime: 0

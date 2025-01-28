@@ -48,7 +48,7 @@ MonoBehaviour:
   uiTextTMP: {fileID: -3628387380059347232, guid: f299aa98d49ff0347a1ae6212f2e940b, type: 3}
   hideScrollingCharacters: 0
   uiText: {fileID: 0}
-  _label: GGJ2025
+  _label: The Bath House
   anchor: 4
   textEffects: 1
   outlineSize: 2
@@ -536,14 +536,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5f455f0e4a864975bf60bc153fbe20d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuSource: 2
-  canvas: {fileID: 0}
+  menuSource: 1
+  canvas: {fileID: 1356444194385655562, guid: 3392508b4520fc24ca3d663763d611c4, type: 3}
   canvasAssetKey: 
   canvasID: 1949740
   rectTransform: {fileID: 22400018, guid: f66e461546b8d45b39265c5b52709b48, type: 3}
   rectTransformID: 14169666
   uiTransitionType: 1
-  uiPositionType: 0
+  uiPositionType: 4
   _isLocked: 0
   id: 5
   title: Conversation
@@ -2643,7 +2643,7 @@ MonoBehaviour:
   moveWithCharacter: 1
   selected_element: {fileID: 0}
   selected_slot: 0
-  autoSelectFirstVisibleElement: 0
+  autoSelectFirstVisibleElement: 1
   firstSelectedElement: 
   elements:
   - {fileID: 253780867048655114}
@@ -3575,32 +3575,29 @@ MonoBehaviour:
   relativePosition: {x: 0, y: 0}
   numSlots: 5
   uiSlots:
-  - uiButton: {fileID: 0}
+  - uiButton: {fileID: 1172011450428199623, guid: 3392508b4520fc24ca3d663763d611c4, type: 3}
     uiButtonID: 2146318
     sprite: {fileID: 0}
-  - uiButton: {fileID: 0}
+  - uiButton: {fileID: 5000767046520408406, guid: 3392508b4520fc24ca3d663763d611c4, type: 3}
     uiButtonID: 2146790
     sprite: {fileID: 0}
-  - uiButton: {fileID: 0}
+  - uiButton: {fileID: 6710068434005550819, guid: 3392508b4520fc24ca3d663763d611c4, type: 3}
     uiButtonID: 2147228
     sprite: {fileID: 0}
-  - uiButton: {fileID: 0}
+  - uiButton: {fileID: 6175866813944429447, guid: 3392508b4520fc24ca3d663763d611c4, type: 3}
     uiButtonID: 2148078
     sprite: {fileID: 0}
-  - uiButton: {fileID: 0}
+  - uiButton: {fileID: 1350618191799938491, guid: 3392508b4520fc24ca3d663763d611c4, type: 3}
     uiButtonID: 2148506
     sprite: {fileID: 0}
-  - uiButton: {fileID: 0}
+  - uiButton: {fileID: 6520561533018088874, guid: 3392508b4520fc24ca3d663763d611c4, type: 3}
     uiButtonID: 2148940
     sprite: {fileID: 0}
-  - uiButton: {fileID: 0}
+  - uiButton: {fileID: 732941918933736469, guid: 3392508b4520fc24ca3d663763d611c4, type: 3}
     uiButtonID: 2147652
     sprite: {fileID: 0}
-  - uiButton: {fileID: 0}
+  - uiButton: {fileID: 5586526822846211275, guid: 3392508b4520fc24ca3d663763d611c4, type: 3}
     uiButtonID: 939142
-    sprite: {fileID: 0}
-  - uiButton: {fileID: 0}
-    uiButtonID: 939172
     sprite: {fileID: 0}
   textEffects: 0
   outlineSize: 2
@@ -3610,7 +3607,7 @@ MonoBehaviour:
   anchor: 3
   fixedOption: 0
   optionToShow: 1
-  maxSlots: 9
+  maxSlots: 8
   markAlreadyChosen: 1
   alreadyChosenFontColour: {r: 0.38005382, g: 0.35925615, b: 0.08758647, a: 0.19607843}
   alreadyChosenFontHighlightedColour: {r: 0.40700805, g: 0.3670951, b: 0.0411396, a: 0.54901963}
@@ -4747,7 +4744,7 @@ MonoBehaviour:
   inventoryPropertyType: 0
   selectedObjectiveLabelType: 0
   itemSlotNumber: 0
-  uiComponentHideStyle: 0
+  uiComponentHideStyle: 1
 --- !u!114 &740630374994253779
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5225,8 +5222,8 @@ MonoBehaviour:
   - uiButton: {fileID: 6681707983284930942, guid: a5d57db27adfd4a14a1b12585d521ea8, type: 3}
     uiButtonID: 285736
     sprite: {fileID: 0}
-  - uiButton: {fileID: 1691155451804481112, guid: a5d57db27adfd4a14a1b12585d521ea8, type: 3}
-    uiButtonID: 286144
+  - uiButton: {fileID: 4216292192086191505, guid: a5d57db27adfd4a14a1b12585d521ea8, type: 3}
+    uiButtonID: 1320664
     sprite: {fileID: 0}
   - uiButton: {fileID: 2342945475773853351, guid: a5d57db27adfd4a14a1b12585d521ea8, type: 3}
     uiButtonID: 286572
@@ -5273,7 +5270,7 @@ MonoBehaviour:
   updateHotspotLabelWhenHover: 0
   hoverSoundOverEmptySlots: 0
   containerSelectMode: 1
-  displayType: 2
+  displayType: 0
   uiHideStyle: 0
   autoOpenDocument: 1
   emptySlotTexture: {fileID: 0}
@@ -6277,7 +6274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuSource: 1
-  canvas: {fileID: 22300000, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
+  canvas: {fileID: 22300000, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
   canvasAssetKey: 
   canvasID: 0
   rectTransform: {fileID: 22400036, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
@@ -7905,56 +7902,65 @@ MonoBehaviour:
   relativePosition: {x: 0, y: 0}
   numSlots: 13
   uiSlots:
-  - uiButton: {fileID: 11400046, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
+  - uiButton: {fileID: 11400046, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
     uiButtonID: 1857130
     sprite: {fileID: 0}
-  - uiButton: {fileID: 11400048, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
+  - uiButton: {fileID: 11400048, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
     uiButtonID: 1855142
     sprite: {fileID: 0}
-  - uiButton: {fileID: 11400042, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
+  - uiButton: {fileID: 11400042, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
     uiButtonID: 1853254
     sprite: {fileID: 0}
-  - uiButton: {fileID: 11400036, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
+  - uiButton: {fileID: 11400036, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
     uiButtonID: 1850746
     sprite: {fileID: 0}
-  - uiButton: {fileID: 11400034, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
+  - uiButton: {fileID: 11400034, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
     uiButtonID: 1848530
     sprite: {fileID: 0}
-  - uiButton: {fileID: 11400028, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
+  - uiButton: {fileID: 11400028, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
     uiButtonID: 1846308
     sprite: {fileID: 0}
-  - uiButton: {fileID: 11400026, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
+  - uiButton: {fileID: 11400026, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
     uiButtonID: 1843542
     sprite: {fileID: 0}
-  - uiButton: {fileID: 11400020, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
+  - uiButton: {fileID: 11400020, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
     uiButtonID: 1802862
     sprite: {fileID: 0}
-  - uiButton: {fileID: 11400018, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
+  - uiButton: {fileID: 11400018, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
     uiButtonID: 1800814
     sprite: {fileID: 0}
-  - uiButton: {fileID: 11400012, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
+  - uiButton: {fileID: 11400012, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
     uiButtonID: 1798390
     sprite: {fileID: 0}
-  - uiButton: {fileID: 11400010, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
+  - uiButton: {fileID: 11400010, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
     uiButtonID: 1795704
     sprite: {fileID: 0}
-  - uiButton: {fileID: 11400004, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
+  - uiButton: {fileID: 11400004, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
     uiButtonID: 1792832
     sprite: {fileID: 0}
-  - uiButton: {fileID: 11400002, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
+  - uiButton: {fileID: 11400002, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
     uiButtonID: 1790898
     sprite: {fileID: 0}
-  - uiButton: {fileID: 4430775270803555899, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
-    uiButtonID: 1169590
+  - uiButton: {fileID: 883482657624594578, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
+    uiButtonID: 981212
     sprite: {fileID: 0}
-  - uiButton: {fileID: 7922020541431685543, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
-    uiButtonID: 1170108
+  - uiButton: {fileID: 1531823614027436783, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
+    uiButtonID: 981754
     sprite: {fileID: 0}
-  - uiButton: {fileID: 5103550673982961731, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
-    uiButtonID: 1170630
+  - uiButton: {fileID: 2948547317539503335, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
+    uiButtonID: 982300
     sprite: {fileID: 0}
-  - uiButton: {fileID: 5026346022103114718, guid: 247be0632b84e4ea7b0b1501488de38c, type: 3}
-    uiButtonID: 1171172
+  - uiButton: {fileID: 3543467352257964470, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
+    uiButtonID: 982868
+    sprite: {fileID: 0}
+  - uiButton: {fileID: 5544629884180958303, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
+    uiButtonID: 983458
+    sprite: {fileID: 0}
+  - uiButton: {fileID: 129052366071309253, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
+    uiButtonID: 987154
+    sprite: {fileID: 0}
+  - uiButton: {fileID: 5642278470792852057, guid: c5fdb7049e6604a319cf602ac818f3c0, type: 3}
+    uiButtonID: 988320
     sprite: {fileID: 0}
   uiPointerState: 0
   textEffects: 0
@@ -7963,7 +7969,7 @@ MonoBehaviour:
   effectColour: {r: 0, g: 0, b: 0, a: 1}
   inventoryBoxType: 0
   actionListOnClick: {fileID: 0}
-  maxSlots: 17
+  maxSlots: 20
   limitToCategory: 0
   limitToDefinedInteractions: 1
   categoryID: -1

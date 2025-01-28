@@ -13,7 +13,6 @@
 
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Serialization;
 using System.Linq;
 using System;
 using UnityEngine.UI;
@@ -50,88 +49,94 @@ namespace GGJ2025
 
 		private void Awake()
 		{
-			AC.ACDebug.Log("ConversationFromFile Awake called", this);
-			conversationSystem = GetComponent<IConversationSystem>() ?? 
-				new AdventureCreatorConversationSystem();
+
 			
-			// Hook into AC's event system
-			AC.EventManager.OnClickConversation += OnClickConversation;
 		}
 
-		private void OnDestroy()
+		private void OnEnable()
 		{
+			AC.ACDebug.Log("[ConversationFromFile] OnEnable called", this);
+			
+
+			if (stage == ConversationStage.Question || stage == ConversationStage.Action && loadFromJson && jsonFile != null)
+			{
+				// Add event subscriptions
+				AC.EventManager.OnClickConversation -= OnClickConversation;  // Always unsubscribe first
+				AC.EventManager.OnClickConversation += OnClickConversation;
+				
+				AC.EventManager.OnEndActionList += OnEndActionList;
+				AC.EventManager.OnEndConversation += OnEndConversation;
+				AC.EventManager.OnFinishLoading += OnFinishLoading;
+				LoadConversationFromJson();
+			}
+
+		}
+
+		private void OnDisable()
+		{
+			// Clean up all event subscriptions
 			AC.EventManager.OnClickConversation -= OnClickConversation;
+			AC.EventManager.OnEndActionList -= OnEndActionList;
+			AC.EventManager.OnEndConversation -= OnEndConversation;
+			AC.EventManager.OnFinishLoading -= OnFinishLoading;
 		}
 
 		private void OnClickConversation(AC.Conversation conversation, int optionID)
 		{
 			if (conversation == this && loadFromJson && jsonFile != null)
 			{
-				AC.ACDebug.Log($"Intercepting conversation click with optionID: {optionID}", this);
 
-				// Find and mark the clicked option as used
+				// Find the clicked option
 				ButtonDialogExtended buttonDialog = null;
 				foreach (var option in options)
 				{
-					if (option.ID == optionID && option is ButtonDialogExtended extendedOption)
-					{
-						buttonDialog = extendedOption;
-						buttonDialog.hasBeenUsed = true;
-						AC.ACDebug.Log($"Marked option '{option.label}' as used", this);
+					option.isOn = false;
+					if (option.ID == optionID)
+					{					
+						option.hasBeenChosen = true;
 
-						// get the title of the option and check if it contains <i>
-						if (option.label.Contains("<i>"))
+						// Process inventory items BEFORE marking as used
+						ProcessTextForInventoryItems(option.label);						
+
+						// Now mark as used and store the button dialog
+						if (option is ButtonDialogExtended extendedOption)
 						{
-							// get the text between <i> and </i>
-							var textBetweenTags = option.label.Substring(option.label.IndexOf("<i>") + 3, option.label.IndexOf("</i>") - option.label.IndexOf("<i>") - 3);
-							AC.ACDebug.Log($"Text between tags: {textBetweenTags}", this);
-
-							// Find the item in the inventory manager
-							AC.InvItem itemToAdd = AC.KickStarter.inventoryManager.GetItem(textBetweenTags);
-							if (itemToAdd != null)
-							{
-								// Add the item to the player's inventory using the item's ID
-								AC.KickStarter.runtimeInventory.Add(itemToAdd.id);
-								AC.ACDebug.Log($"Added item '{textBetweenTags}' to player's inventory", this);
-							}
-							else
-							{
-								AC.ACDebug.LogWarning($"Could not find item '{textBetweenTags}' in inventory manager", this);
-							}
+							buttonDialog = extendedOption;
+							buttonDialog.hasBeenUsed = true;
+							AC.ACDebug.Log($"Marked option '{option.label}' as used", this);
 						}
-
-						break;
 					}
 				}
 
+				// Rest of the switch statement for handling option types
 				if (buttonDialog != null)
 				{
 					var optionData = buttonDialog.customData as ConversationOptionData;
 					AC.ACDebug.Log($"Option data: {optionData}", this);
-
-					if (optionData?.type == "leave")
+					switch (optionData?.type)
 					{
-						// End the conversation
-						AC.KickStarter.eventManager.Call_OnEndConversation(this);
-						return;
-					}
-					else if (optionData?.type == "response")
-					{
-						// After showing response, return to question stage
-						stage = ConversationStage.Question;
-						UpdateOptionVisibility();
-					}
-					else if (optionData?.type == "simple")
-					{
-						AC.ACDebug.Log($"Simple conversation option data: {optionData}", this);
-						ExecuteSimpleConversation(optionData);
-					}
-					else if (optionData?.type == "question")
-					{
-						LoadResponseOptions(optionData);
+						case "response":
+							// After showing response, return to question stage
+							stage = ConversationStage.Question;
+							UpdateOptionVisibility();
+							break;
+							
+						case "simple":
+							AC.ACDebug.Log($"Simple conversation option data: {optionData}", this);
+							ExecuteSimpleConversation(optionData);
+							break;
+							
+						case "question":
+							LoadResponseOptions(optionData);
+							break;
+							
+						default:
+							AC.ACDebug.LogWarning($"Unknown option type: {optionData?.type}", this);
+							break;
 					}
 				}
 			}
+			
 		}
 
 		#region Variables
@@ -151,45 +156,23 @@ namespace GGJ2025
 
 		#region UnityStandards
 
-		private void OnEnable ()
-		{
-			AC.ACDebug.Log("[ConversationFromFile] OnEnable called", this);
-			AC.EventManager.OnEndActionList += OnEndActionList;
-			AC.EventManager.OnEndConversation += OnEndConversation;
-			AC.EventManager.OnFinishLoading += OnFinishLoading;
-
-			// Add JSON loading logic
-			if (stage == ConversationStage.Question || stage == ConversationStage.Action && loadFromJson && jsonFile != null)
-			{
-				LoadConversationFromJson();
-			}
-		}
-
-
-		private void OnDisable ()
-		{
-			AC.EventManager.OnEndActionList -= OnEndActionList;
-			AC.EventManager.OnEndConversation -= OnEndConversation;
-			AC.EventManager.OnFinishLoading -= OnFinishLoading;
-		}
-
 		private void Start ()
 		{
-			AC.ACDebug.Log("ConversationFromFile Start called", this);
-			if (AC.KickStarter.inventoryManager)
-			{
-				foreach (AC.ButtonDialog option in options)
-				{
-					if (option.linkToInventory && option.cursorIcon.texture == null)
-					{
-						AC.InvItem linkedItem = AC.KickStarter.inventoryManager.GetItem (option.linkedInventoryID);
-						if (linkedItem != null && linkedItem.tex != null)
-						{
-							option.cursorIcon.ReplaceTexture (linkedItem.tex);
-						}
-					}
-				}
-			}
+			// AC.ACDebug.Log("ConversationFromFile Start called", this);
+			// if (AC.KickStarter.inventoryManager)
+			// {
+			// 	foreach (AC.ButtonDialog option in options)
+			// 	{
+			// 		if (option.linkToInventory && option.cursorIcon.texture == null)
+			// 		{
+			// 			AC.InvItem linkedItem = AC.KickStarter.inventoryManager.GetItem (option.linkedInventoryID);
+			// 			if (linkedItem != null && linkedItem.tex != null)
+			// 			{
+			// 				option.cursorIcon.ReplaceTexture (linkedItem.tex);
+			// 			}
+			// 		}
+			// 	}
+			// }
 		}
 
 		#endregion
@@ -232,7 +215,7 @@ namespace GGJ2025
 
 		private void LoadResponseOptions(ConversationOptionData optionData)
 		{
-			options.Clear();
+			UpdateOptionVisibility();
 
 			AC.ACDebug.Log($"[ConversationFromFile] LoadResponseOptions called with objectKey: {optionData?.objectKey}", this);
 			if (!string.IsNullOrEmpty(optionData.objectKey))
@@ -303,21 +286,26 @@ namespace GGJ2025
 			AC.ACDebug.Log($"[ConversationFromFile] ExecuteSimpleConversation called with objectKey: {optionData?.objectKey}", this);
 			AC.ACDebug.Log($"[ConversationFromFile] ExecuteSimpleConversation called with answer: {optionData?.answer}", this);
 
-			// Process answer text for inventory items
-			ProcessTextForInventoryItems(optionData?.answer);
-
-			// Remove all existing options except the clicked one
-			var optionsToRemove = options.Where(o => o is ButtonDialogExtended).ToList();
-			foreach (var option in optionsToRemove)
+			// Create a response dialog option
+			// check if it already exists in the current options list:
+			var existingOption = options.FirstOrDefault(o => o.label == optionData.answer);
+			if (existingOption != null)
 			{
-				options.Remove(option);
+				AC.ACDebug.Log($"[ConversationFromFile] ExecuteSimpleConversation called with existing option: {existingOption.label}", this);
+				return;
 			}
 
-			// Create a response dialog option
-			var buttonDialog = new ButtonDialogExtended(new int[] { 0 });
-			buttonDialog.label = optionData.answer;
-			buttonDialog.customData = new ConversationOptionData { type = "response" };
-			options.Add(buttonDialog);
+			// if it doesn't exist, create a new one
+
+			lastGeneratedId++;
+			int newId = lastGeneratedId;
+			int[] newIdArray = new int[] { newId };
+			
+			ButtonDialogExtended dialog = new ButtonDialogExtended(newIdArray);
+			dialog.ID = newId;
+			dialog.label = optionData.answer;
+			dialog.customData = new ConversationOptionData { type = "response" };
+			options.Add(dialog);
 
 			// Change stage to show response
 			stage = ConversationStage.Response;
@@ -632,7 +620,11 @@ namespace GGJ2025
 
 		protected virtual void LoadConversationFromJson()
 		{
-			options.Clear();
+			// hide all the options
+			foreach (var option in options)
+			{
+				option.isOn = false;
+			}
 
 			AC.ACDebug.Log("[ConversationFromFile] LoadConversationFromJson called", this);
 			try
@@ -780,21 +772,6 @@ namespace GGJ2025
 						}
 					}
 				}
-
-				// Add the leave conversation option as the fifth item
-				var leaveOptionData = new ConversationOptionData
-				{
-					type = "leave",
-					answer = "Goodbye."
-				};
-
-				ButtonDialogExtended leaveDialog = CreateDialogExitOption(
-					"I should go...", 
-					leaveOptionData
-				);
-				leaveDialog.isOn = true;  // Always visible during questions
-				leaveDialog.hasBeenUsed = false;
-				options.Add(leaveDialog);
 			}
 			catch (System.Exception e)
 			{
@@ -829,31 +806,25 @@ namespace GGJ2025
 		{
 			if (string.IsNullOrEmpty(text)) return;
 
-			// Find all matches of text within <i> tags
-			var matches = System.Text.RegularExpressions.Regex.Matches(text, @"<i>(.*?)</i>");
+			// Find all matches of text within <u> tags
+			var matches = System.Text.RegularExpressions.Regex.Matches(text, @"<u>(.*?)</u>");
 			
 			foreach (System.Text.RegularExpressions.Match match in matches)
 			{
 				string itemName = match.Groups[1].Value.Trim();
 				if (!string.IsNullOrEmpty(itemName))
 				{
-					// Check if item already exists
-					AC.InvItem existingItem = AC.KickStarter.inventoryManager.GetItem(itemName);
-					if (existingItem == null)
+					// Find the item in the inventory manager
+					AC.InvItem itemToAdd = AC.KickStarter.inventoryManager.GetItem(itemName);
+					if (itemToAdd != null)
 					{
-						// Create new inventory item with a unique ID
-						int newItemId = AC.KickStarter.inventoryManager.items.Count > 0 
-							? AC.KickStarter.inventoryManager.items.Max(i => i.id) + 1 
-							: 0;
-						
-						AC.InvItem newItem = new AC.InvItem(newItemId);
-						newItem.label = itemName;
-						newItem.altLabel = itemName; // Alternative display name
-						newItem.canCarryMultiple = false;
-						
-						// Add to inventory manager
-						AC.KickStarter.inventoryManager.items.Add(newItem);
-						AC.ACDebug.Log($"Created new inventory item: {itemName} with ID: {newItemId}", this);
+						// Add the item to the player's inventory using the item's ID
+						AC.KickStarter.runtimeInventory.Add(itemToAdd.id);
+						AC.ACDebug.Log($"Added item '{itemName}' to player's inventory", this);
+					}
+					else
+					{
+						AC.ACDebug.LogWarning($"Could not find item '{itemName}' in inventory manager", this);
 					}
 				}
 			}
@@ -898,52 +869,6 @@ namespace GGJ2025
 			dialog.customData = optionData;
 			dialog.linkToInventory = false;
 			
-			
-			return dialog;
-		}
-
-		private ButtonDialogExtended CreateDialogExitOption(string text, ConversationOptionData optionData)
-		{
-			AC.ACDebug.Log($"[ConversationFromFile] CreateDialogExitOption called with text: {text}, type: {optionData?.type}", this);
-			
-			// Check for existing exit option and remove it first
-			ButtonDialogExtended existingOption = null;
-			for (int i = options.Count - 1; i >= 0; i--)
-			{
-				if (options[i].ID == 10000)
-				{
-					existingOption = options[i] as ButtonDialogExtended;
-					options.RemoveAt(i);
-					if (existingOption?.dialogueOption != null)
-					{
-						Destroy(existingOption.dialogueOption.gameObject);
-					}
-				}
-			}
-
-			// Create new exit option
-			int newId = 10000;
-			int[] newIdArray = new int[] { newId };
-			
-			ButtonDialogExtended dialog = new ButtonDialogExtended(newIdArray);
-			dialog.ID = newId;
-			dialog.label = text;
-			dialog.isOn = true;
-			dialog.conversationAction = AC.ConversationAction.Stop;
-			dialog.newConversation = null;
-
-			// Create the DialogueOption ActionList
-			GameObject actionListObject = new GameObject($"Dialogue Exit Option: {text}");
-			actionListObject.transform.parent = transform;
-			AC.DialogueOption dialogueOption = actionListObject.AddComponent<AC.DialogueOption>();
-			
-			// Set up the actions
-			dialogueOption.actions = new List<AC.Action>();
-			dialogueOption.actionListType = AC.ActionListType.PauseGameplay;
-
-			dialog.dialogueOption = dialogueOption;
-			dialog.customData = optionData;
-			dialog.linkToInventory = false;
 			
 			return dialog;
 		}
@@ -999,18 +924,7 @@ namespace GGJ2025
 					{
 						ConversationTracker.ResetTracking();
 					}
-					
-					LoadConversationFromJson();
 				}
-			}
-		}
-
-	private void OnFinishLoading()
-		{
-			AC.ACDebug.Log("[ConversationFromFile] OnFinishLoading called", this);
-			if (stage == ConversationStage.Question && loadFromJson && jsonFile != null)
-			{	
-				LoadConversationFromJson();
 			}
 		}
 
@@ -1024,29 +938,27 @@ namespace GGJ2025
 				if (option is ButtonDialogExtended extendedOption)
 				{
 					var optionData = extendedOption.customData as ConversationOptionData;
-					
+
 					// Default to hidden
 					extendedOption.isOn = false;
-
-					// Skip if already used
-					if (extendedOption.hasBeenUsed)
-					{
-						AC.ACDebug.Log($"Skipping used option: {option.label}", this);
-						continue;
-					}
 
 					// Check if option matches current stage
 					bool isMatchingStage = stage switch
 					{
-						ConversationStage.Question => optionData?.type == "question" || optionData?.type == "simple" || optionData?.type == "leave",
+						ConversationStage.Question => optionData?.type == "question" || optionData?.type == "simple",
 						ConversationStage.Response => optionData?.type == "response",
 						ConversationStage.Action => optionData?.type == "action",
 						ConversationStage.Simple_Answer => optionData?.type == "simple",
 						_ => false
 					};
-
+					
 					// Only show if matches stage and hasn't been used
 					extendedOption.isOn = isMatchingStage;
+					
+					if (extendedOption.hasBeenChosen)
+					{
+						extendedOption.isOn = false;
+					}
 
 					// Log visibility decision
 					AC.ACDebug.Log($"Option '{option.label}' visibility set to {extendedOption.isOn} " +

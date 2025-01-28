@@ -52,7 +52,7 @@ MonoBehaviour:
     alwaysAnimate: 0
   pointerIcon:
     texture: {fileID: 2800000, guid: 5c83780962ed843c0928648679746938, type: 3}
-    isAnimated: 1
+    isAnimated: 0
     numFrames: 1
     numRows: 1
     numCols: 1

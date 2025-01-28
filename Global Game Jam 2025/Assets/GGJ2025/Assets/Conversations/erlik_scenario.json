@@ -2,35 +2,35 @@
     "conversations": [
         {
             "question": "Do you find it relaxing here?",
-            "answer": "Certainly, it's nice to get <i>away</i> from the endless screaming once in a while."
+            "answer": "Certainly, it's nice to get <u>away</u> from the endless screaming once in a while."
         },
         {
             "question": "Why do you come here?",
-            "answer": "I come here to <i>escape</i> our supposed 'leader', Tengri. Why that arrogant oaf gets the final say on everything, I do not know."
+            "answer": "I come here to <u>escape</u> our supposed 'leader', Tengri. Why that arrogant oaf gets the final say on everything, I do not know."
         },
         {
             "question": "Will washing here cleanse me?",
-            "answer": "No amount of time here can <i>wash</i> away your guilty conscience, haha."
+            "answer": "No amount of time here can <u>wash</u> away your guilty conscience, haha."
         },
         {
             "question": "What is your purpose?",
-            "answer": "I am tasked with dealing with the dead and the damned. A thankless job, yet without <i>darkness</i>, there can be no light."
+            "answer": "I am tasked with dealing with the dead and the damned. A thankless job, yet without <u>darkness</u>, there can be no light."
         },
         {
             "question": "This place is beautiful, isn't it?",
-            "answer": "It is, but why isn't this <i>room</i> adorned with more gold? Was my presence not aforementioned?"
+            "answer": "It is, but why isn't this <u>room</u> adorned with more gold? Was my presence not aforementioned?"
         },
         {
             "question": "Is it always this hot in here?",
-            "answer": "Of course! But this is refreshingly cool compared to the infernal <i>heat</i> I am used to."
+            "answer": "Of course! But this is refreshingly cool compared to the infernal <u>heat</u> I am used to."
         },
         {
             "question": "Can I smell lavender?",
-            "answer": "Indeed. The stench of <i>decay</i> does not fill this place. It is... pleasant."
+            "answer": "Indeed. The stench of <u>decay</u> does not fill this place. It is... pleasant."
         },
         {
             "question": "How long have you been here?",
-            "answer": "Who can tell? We immortal beings do not <i>measure</i> our gradations of man."
+            "answer": "Who can tell? We immortal beings do not <u>measure</u> our gradations of man."
         }
     ],
     "objects": {

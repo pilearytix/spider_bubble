@@ -23,7 +23,7 @@ MonoBehaviour:
   useProfiles: 1
   maxSaves: 5
   orderSavesByUpdateTime: 1
-  reloadSceneWhenLoading: 1
+  reloadSceneWhenLoading: 0
   saveWithThreading: 0
   saveCompression: 0
   saveAssetReferencesWithAddressables: 0
@@ -34,13 +34,15 @@ MonoBehaviour:
     importLabelID: -1
     defaultAutosaveLabel: Autosave
     autosaveLabelID: -1
-  referenceScenesInSave: 0
+  referenceScenesInSave: 1
   useInvariantCulture: 1
   sceneAttributes: []
-  actionListOnStart: {fileID: 11400000, guid: d2426ce05bae5ca4bb4dcec6b3e1b55a, type: 2}
+  actionListOnStart: {fileID: 0}
   blackOutWhenSkipping: 0
   events:
   - rid: 6960193976633655366
+  - rid: 6960193996915212526
+  - rid: 6960193996915212577
   savePlayerReferencesWithAddressables: 0
   playerSwitching: 1
   legacyPlayer: {fileID: 0}
@@ -220,14 +222,14 @@ MonoBehaviour:
   deactivatedLayer: Ignore Raycast
   useLoadingScreen: 1
   manualSceneActivation: 0
-  loadingSceneIs: 0
+  loadingSceneIs: 1
   loadScenesFromAddressable: 0
-  loadingSceneName: 
+  loadingSceneName: Loading
   loadingScene: 0
-  useAsyncLoading: 0
+  useAsyncLoading: 1
   loadingDelay: 0
   blackOutWhenInitialising: 1
-  spawnPersistentEnginePrefab: 1
+  spawnPersistentEnginePrefab: 0
   autoCallUnloadUnusedAssets: 1
   playMusicWhilePaused: 0
   playAmbienceWhilePaused: 1
@@ -275,3 +277,21 @@ MonoBehaviour:
         cutscene: {fileID: 0}
         actionListAsset: {fileID: 11400000, guid: 0d51ed5dc85835d4da50ef3fd9223c4c, type: 2}
         parameterIDs: 
+    - rid: 6960193996915212526
+      type: {class: EventSceneCompletePreload, ns: AC, asm: AC}
+      data:
+        label: 
+        id: 1
+        cutscene: {fileID: 0}
+        actionListAsset: {fileID: 11400000, guid: 4f52853c17c69464893a19e8779f43da, type: 2}
+        parameterIDs: 00000000
+    - rid: 6960193996915212577
+      type: {class: EventSceneSwitch, ns: AC, asm: AC}
+      data:
+        label: 
+        id: 2
+        cutscene: {fileID: 0}
+        actionListAsset: {fileID: 11400000, guid: cf3a89e0503fe594ca14456b9b4c2e91, type: 2}
+        parameterIDs: 00000000
+        beforeAfter: 1
+        dueToLoadingSave: 2
