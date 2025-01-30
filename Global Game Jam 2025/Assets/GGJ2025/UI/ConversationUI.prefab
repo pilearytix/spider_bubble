@@ -443,8 +443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 1
-  m_VerticalFit: 1
+  m_HorizontalFit: 2
+  m_VerticalFit: 2
 --- !u!114 &11453742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,7 +567,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 640, y: 480}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.437
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -614,7 +614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdf6f44d8b2771145a12d30a6bdf1be6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transformToControl: {fileID: 0}
+  transformToControl: {fileID: 22400018}
   minAnchorPoint: {x: 0, y: 0}
   maxAnchorPoint: {x: 1, y: 1}
   updatePosition: 1
@@ -731,7 +731,7 @@ MonoBehaviour:
   minWobbleAmplitude: 5
   maxWobbleAmplitude: 10
   returnDuration: 1
-  spawnRadiusPercent: 0.757
+  spawnRadiusPercent: 0.457
   showSpawnRadius: 1
   lifetime: 10000
   fadeOutDuration: 1
@@ -1422,7 +1422,7 @@ MonoBehaviour:
   minWobbleAmplitude: 5
   maxWobbleAmplitude: 10
   returnDuration: 1
-  spawnRadiusPercent: 0.757
+  spawnRadiusPercent: 0.457
   showSpawnRadius: 1
   lifetime: 10000
   fadeOutDuration: 1
@@ -2127,7 +2127,7 @@ MonoBehaviour:
   minWobbleAmplitude: 5
   maxWobbleAmplitude: 10
   returnDuration: 1
-  spawnRadiusPercent: 0.757
+  spawnRadiusPercent: 0.457
   showSpawnRadius: 1
   lifetime: 10000
   fadeOutDuration: 1
@@ -2364,7 +2364,7 @@ MonoBehaviour:
   minWobbleAmplitude: 5
   maxWobbleAmplitude: 10
   returnDuration: 1
-  spawnRadiusPercent: 0.757
+  spawnRadiusPercent: 0.457
   showSpawnRadius: 1
   lifetime: 10000
   fadeOutDuration: 1
@@ -2901,7 +2901,7 @@ MonoBehaviour:
   minWobbleAmplitude: 5
   maxWobbleAmplitude: 10
   returnDuration: 1
-  spawnRadiusPercent: 0.757
+  spawnRadiusPercent: 0.457
   showSpawnRadius: 1
   lifetime: 10000
   fadeOutDuration: 1
@@ -2988,7 +2988,7 @@ MonoBehaviour:
   minWobbleAmplitude: 5
   maxWobbleAmplitude: 10
   returnDuration: 1
-  spawnRadiusPercent: 0.757
+  spawnRadiusPercent: 0.457
   showSpawnRadius: 1
   lifetime: 10000
   fadeOutDuration: 1
@@ -3471,7 +3471,7 @@ MonoBehaviour:
   minWobbleAmplitude: 2
   maxWobbleAmplitude: 3
   returnDuration: 0.5
-  spawnRadiusPercent: 0
+  spawnRadiusPercent: 0.015
   showSpawnRadius: 1
   lifetime: 100000000
   fadeOutDuration: 1
@@ -3671,9 +3671,9 @@ RectTransform:
   - {fileID: 4951692489485774894}
   m_Father: {fileID: 22400018}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 312, y: -180}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 326, y: -151}
   m_SizeDelta: {x: 80, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9151191689395567431
@@ -3781,7 +3781,7 @@ MonoBehaviour:
   minWobbleAmplitude: 5
   maxWobbleAmplitude: 10
   returnDuration: 1
-  spawnRadiusPercent: 0.757
+  spawnRadiusPercent: 0.457
   showSpawnRadius: 1
   lifetime: 10000
   fadeOutDuration: 1
@@ -4024,7 +4024,7 @@ MonoBehaviour:
   minWobbleAmplitude: 5
   maxWobbleAmplitude: 10
   returnDuration: 1
-  spawnRadiusPercent: 0.757
+  spawnRadiusPercent: 0.457
   showSpawnRadius: 1
   lifetime: 10000
   fadeOutDuration: 1
