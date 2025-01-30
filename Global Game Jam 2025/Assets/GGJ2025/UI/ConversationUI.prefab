@@ -388,8 +388,8 @@ RectTransform:
   - {fileID: 22400014}
   m_Father: {fileID: 22400020}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HorizontalFit: 1
-  m_VerticalFit: 2
+  m_VerticalFit: 1
 --- !u!114 &11453742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -731,7 +731,7 @@ MonoBehaviour:
   minWobbleAmplitude: 5
   maxWobbleAmplitude: 10
   returnDuration: 1
-  spawnRadiusPercent: 0.735
+  spawnRadiusPercent: 0.757
   showSpawnRadius: 1
   lifetime: 10000
   fadeOutDuration: 1
@@ -772,7 +772,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 130, y: 139}
+  m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5306670723536559439
 CanvasRenderer:
@@ -829,12 +829,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
+  m_fontSize: 13
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 8
-  m_fontSizeMax: 14
+  m_fontSizeMax: 13
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -886,12 +886,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSize: 80
-  targetWidth: 130
+  targetWidth: 100
   heightPerLine: 30
-  maxSize: 180
+  maxSize: 160
   maxWordsPerLine: 6
-  padding: 10
-  textMargins: {x: 20, y: 20, z: 20, w: 20}
+  padding: 5
+  textMargins: {x: 30, y: 30, z: 30, w: 30}
 --- !u!1 &280860822113072234
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,7 +928,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 130, y: 139}
+  m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9150222488150477198
 CanvasRenderer:
@@ -985,12 +985,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
+  m_fontSize: 13
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 8
-  m_fontSizeMax: 14
+  m_fontSizeMax: 13
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1042,12 +1042,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSize: 80
-  targetWidth: 130
+  targetWidth: 100
   heightPerLine: 30
-  maxSize: 180
+  maxSize: 160
   maxWordsPerLine: 6
-  padding: 10
-  textMargins: {x: 20, y: 20, z: 20, w: 20}
+  padding: 5
+  textMargins: {x: 30, y: 30, z: 30, w: 30}
 --- !u!1 &437634568091093246
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,13 +1242,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ca676f855e498b4dbe1ff16c0fd8bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSize: 60
-  targetWidth: 80
-  heightPerLine: 15
-  maxSize: 100
-  maxWordsPerLine: 4
+  minSize: 80
+  targetWidth: 100
+  heightPerLine: 30
+  maxSize: 160
+  maxWordsPerLine: 6
   padding: 5
-  textMargins: {x: 15, y: 15, z: 15, w: 15}
+  textMargins: {x: 30, y: 30, z: 30, w: 30}
 --- !u!114 &106070814988641370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1296,12 +1296,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
+  m_fontSize: 13
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 8
-  m_fontSizeMax: 10
+  m_fontSizeMax: 13
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1422,7 +1422,7 @@ MonoBehaviour:
   minWobbleAmplitude: 5
   maxWobbleAmplitude: 10
   returnDuration: 1
-  spawnRadiusPercent: 0.735
+  spawnRadiusPercent: 0.757
   showSpawnRadius: 1
   lifetime: 10000
   fadeOutDuration: 1
@@ -1463,7 +1463,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 130, y: 139}
+  m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5566840596660695581
 CanvasRenderer:
@@ -1520,12 +1520,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
+  m_fontSize: 13
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 8
-  m_fontSizeMax: 14
+  m_fontSizeMax: 13
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1577,12 +1577,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSize: 80
-  targetWidth: 130
+  targetWidth: 100
   heightPerLine: 30
-  maxSize: 180
+  maxSize: 160
   maxWordsPerLine: 6
-  padding: 10
-  textMargins: {x: 20, y: 20, z: 20, w: 20}
+  padding: 5
+  textMargins: {x: 30, y: 30, z: 30, w: 30}
 --- !u!1 &1271005595565517269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1595,6 +1595,7 @@ GameObject:
   - component: {fileID: 5452046952114699952}
   - component: {fileID: 1503384845966147971}
   - component: {fileID: 6869214584739960481}
+  - component: {fileID: 2507891754619851947}
   - component: {fileID: 6102677404628187757}
   m_Layer: 5
   m_Name: Speechbubble
@@ -1705,6 +1706,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2507891754619851947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271005595565517269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e18d75faf6945c587a1aba3ff07fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6102677404628187757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1756,7 +1769,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 130, y: 139}
+  m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5884770475571378
 CanvasRenderer:
@@ -1813,12 +1826,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
+  m_fontSize: 13
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 8
-  m_fontSizeMax: 14
+  m_fontSizeMax: 13
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1870,12 +1883,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSize: 80
-  targetWidth: 130
+  targetWidth: 100
   heightPerLine: 30
-  maxSize: 180
+  maxSize: 160
   maxWordsPerLine: 6
-  padding: 10
-  textMargins: {x: 20, y: 20, z: 20, w: 20}
+  padding: 5
+  textMargins: {x: 30, y: 30, z: 30, w: 30}
 --- !u!1 &2015038188032150460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1912,7 +1925,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 130, y: 139}
+  m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1831298473555649016
 CanvasRenderer:
@@ -1969,12 +1982,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
+  m_fontSize: 13
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 8
-  m_fontSizeMax: 14
+  m_fontSizeMax: 13
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -2026,12 +2039,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSize: 80
-  targetWidth: 130
+  targetWidth: 100
   heightPerLine: 30
-  maxSize: 180
+  maxSize: 160
   maxWordsPerLine: 6
-  padding: 10
-  textMargins: {x: 20, y: 20, z: 20, w: 20}
+  padding: 5
+  textMargins: {x: 30, y: 30, z: 30, w: 30}
 --- !u!1 &2094531079142863324
 GameObject:
   m_ObjectHideFlags: 0
@@ -2114,7 +2127,7 @@ MonoBehaviour:
   minWobbleAmplitude: 5
   maxWobbleAmplitude: 10
   returnDuration: 1
-  spawnRadiusPercent: 0.735
+  spawnRadiusPercent: 0.757
   showSpawnRadius: 1
   lifetime: 10000
   fadeOutDuration: 1
@@ -2131,6 +2144,7 @@ GameObject:
   - component: {fileID: 1823349775647063587}
   - component: {fileID: 1021269982884746946}
   - component: {fileID: 184890553268019373}
+  - component: {fileID: 3389771721519298812}
   - component: {fileID: 18658599601391581}
   m_Layer: 5
   m_Name: Speechbubble
@@ -2241,6 +2255,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3389771721519298812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2310766404860961461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e18d75faf6945c587a1aba3ff07fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &18658599601391581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2338,7 +2364,7 @@ MonoBehaviour:
   minWobbleAmplitude: 5
   maxWobbleAmplitude: 10
   returnDuration: 1
-  spawnRadiusPercent: 0.735
+  spawnRadiusPercent: 0.757
   showSpawnRadius: 1
   lifetime: 10000
   fadeOutDuration: 1
@@ -2355,6 +2381,7 @@ GameObject:
   - component: {fileID: 5765603048437370701}
   - component: {fileID: 5391226587907794962}
   - component: {fileID: 5144827024932391405}
+  - component: {fileID: 1868541544287713872}
   - component: {fileID: 1391810518235747840}
   m_Layer: 5
   m_Name: Speechbubble (1)
@@ -2465,6 +2492,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1868541544287713872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2539860570686790008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e18d75faf6945c587a1aba3ff07fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1391810518235747840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2492,6 +2531,7 @@ GameObject:
   - component: {fileID: 52951274945683249}
   - component: {fileID: 3746084838866562766}
   - component: {fileID: 6320034536008661820}
+  - component: {fileID: 3465462806272974146}
   - component: {fileID: 6277577580382899023}
   m_Layer: 5
   m_Name: Speechbubble
@@ -2602,6 +2642,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3465462806272974146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2887052467232244251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e18d75faf6945c587a1aba3ff07fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6277577580382899023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2629,6 +2681,7 @@ GameObject:
   - component: {fileID: 4270999567348991634}
   - component: {fileID: 9069794329683651845}
   - component: {fileID: 30771861063294929}
+  - component: {fileID: 3196128462079802874}
   - component: {fileID: 4847848602455979092}
   m_Layer: 5
   m_Name: Speechbubble (2)
@@ -2739,6 +2792,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3196128462079802874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3257597497211604012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e18d75faf6945c587a1aba3ff07fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4847848602455979092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2836,7 +2901,7 @@ MonoBehaviour:
   minWobbleAmplitude: 5
   maxWobbleAmplitude: 10
   returnDuration: 1
-  spawnRadiusPercent: 0.735
+  spawnRadiusPercent: 0.757
   showSpawnRadius: 1
   lifetime: 10000
   fadeOutDuration: 1
@@ -2923,7 +2988,7 @@ MonoBehaviour:
   minWobbleAmplitude: 5
   maxWobbleAmplitude: 10
   returnDuration: 1
-  spawnRadiusPercent: 0.735
+  spawnRadiusPercent: 0.757
   showSpawnRadius: 1
   lifetime: 10000
   fadeOutDuration: 1
@@ -2964,7 +3029,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 130, y: 139}
+  m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1003657845559969036
 CanvasRenderer:
@@ -3021,12 +3086,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
+  m_fontSize: 13
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 8
-  m_fontSizeMax: 14
+  m_fontSizeMax: 13
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -3078,12 +3143,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSize: 80
-  targetWidth: 130
+  targetWidth: 100
   heightPerLine: 30
-  maxSize: 180
+  maxSize: 160
   maxWordsPerLine: 6
-  padding: 10
-  textMargins: {x: 20, y: 20, z: 20, w: 20}
+  padding: 5
+  textMargins: {x: 30, y: 30, z: 30, w: 30}
 --- !u!1 &4543585547494168777
 GameObject:
   m_ObjectHideFlags: 0
@@ -3096,6 +3161,7 @@ GameObject:
   - component: {fileID: 1992317489609001694}
   - component: {fileID: 7104776380535405505}
   - component: {fileID: 1799434360624180863}
+  - component: {fileID: 5040447617173259982}
   - component: {fileID: 4703694562279267904}
   m_Layer: 5
   m_Name: Speechbubble
@@ -3206,6 +3272,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5040447617173259982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4543585547494168777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e18d75faf6945c587a1aba3ff07fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4703694562279267904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3233,6 +3311,7 @@ GameObject:
   - component: {fileID: 4586479516754901713}
   - component: {fileID: 440112680292408651}
   - component: {fileID: 3298186748027663684}
+  - component: {fileID: 3328431253833363561}
   - component: {fileID: 6859040702145517402}
   - component: {fileID: 3957419519748208362}
   - component: {fileID: 6304234440846434804}
@@ -3291,8 +3370,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 025d0f5f2c836a94aa52da829e2a2768, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3345,6 +3424,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3328431253833363561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4584681638881258712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e18d75faf6945c587a1aba3ff07fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6859040702145517402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3380,7 +3471,7 @@ MonoBehaviour:
   minWobbleAmplitude: 2
   maxWobbleAmplitude: 3
   returnDuration: 0.5
-  spawnRadiusPercent: 0.2
+  spawnRadiusPercent: 0
   showSpawnRadius: 1
   lifetime: 100000000
   fadeOutDuration: 1
@@ -3409,6 +3500,7 @@ GameObject:
   - component: {fileID: 3925792780148799039}
   - component: {fileID: 1736483311687537472}
   - component: {fileID: 5237333304972515264}
+  - component: {fileID: 7811919020621149074}
   - component: {fileID: 7187728841972166932}
   m_Layer: 5
   m_Name: Speechbubble (3)
@@ -3519,6 +3611,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7811919020621149074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4612957912055447444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e18d75faf6945c587a1aba3ff07fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7187728841972166932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3677,7 +3781,7 @@ MonoBehaviour:
   minWobbleAmplitude: 5
   maxWobbleAmplitude: 10
   returnDuration: 1
-  spawnRadiusPercent: 0.735
+  spawnRadiusPercent: 0.757
   showSpawnRadius: 1
   lifetime: 10000
   fadeOutDuration: 1
@@ -3718,7 +3822,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 130, y: 139}
+  m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8943605704439751887
 CanvasRenderer:
@@ -3775,12 +3879,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
+  m_fontSize: 13
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 8
-  m_fontSizeMax: 14
+  m_fontSizeMax: 13
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -3832,12 +3936,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSize: 80
-  targetWidth: 130
+  targetWidth: 100
   heightPerLine: 30
-  maxSize: 180
+  maxSize: 160
   maxWordsPerLine: 6
-  padding: 10
-  textMargins: {x: 20, y: 20, z: 20, w: 20}
+  padding: 5
+  textMargins: {x: 30, y: 30, z: 30, w: 30}
 --- !u!1 &8514572677485127613
 GameObject:
   m_ObjectHideFlags: 0
@@ -3920,7 +4024,7 @@ MonoBehaviour:
   minWobbleAmplitude: 5
   maxWobbleAmplitude: 10
   returnDuration: 1
-  spawnRadiusPercent: 0.735
+  spawnRadiusPercent: 0.757
   showSpawnRadius: 1
   lifetime: 10000
   fadeOutDuration: 1
@@ -3937,6 +4041,7 @@ GameObject:
   - component: {fileID: 5423573162736518856}
   - component: {fileID: 4538557026138686108}
   - component: {fileID: 5750531019679552649}
+  - component: {fileID: 5067429557701162491}
   - component: {fileID: 6527321434163392136}
   m_Layer: 5
   m_Name: Speechbubble
@@ -4047,6 +4152,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5067429557701162491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9052011737121201515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e18d75faf6945c587a1aba3ff07fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6527321434163392136
 MonoBehaviour:
   m_ObjectHideFlags: 0
